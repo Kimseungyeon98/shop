@@ -16,4 +16,14 @@ public class MemberServiceImpl implements MemberService{
     public void insertMember(MemberVO member) {
         memberMapper.insertMember(member);
     }
+
+    @Override
+    public MemberVO selectMember(Long num) {
+        return memberMapper.selectMember(num);
+    }
+
+    @Override
+    public MemberVO selectMemberById(String id) {
+        return memberMapper.selectMemberById(id);
+    }
 }

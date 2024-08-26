@@ -8,7 +8,6 @@ spring:
     view: #view 경로 및 확장자 지정
       prefix: /WEB-INF/views/
       suffix: .jsp
-
 mybatis:
   type-aliases-package: ksy.shop.**.vo
-  mapper-locations: ksy/shop/**/dao/*.xml
+  mapper-locations: file:src/main/java/ksy/shop/**/dao/*.xml

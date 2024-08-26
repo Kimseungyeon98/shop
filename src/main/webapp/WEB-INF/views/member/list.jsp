@@ -16,6 +16,6 @@
     <body>
         <h1>회원목록</h1>
         <a href="/member/register">회원가입
-        <a href="/member/signIn">로그인
+        <a href="/member/logIn">로그인
     </body>
 </html>
