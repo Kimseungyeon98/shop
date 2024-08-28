@@ -50,4 +50,13 @@ public class MemberController {
             return logIn();
         }
     }
+
+    @GetMapping("/member/logOut")
+    public String logOut(HttpSession session){
+        MemberVO user = (MemberVO)session.getAttribute("user");
+        if(user!=null){
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
 }
