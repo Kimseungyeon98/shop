@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService{
@@ -13,17 +15,17 @@ public class MemberServiceImpl implements MemberService{
     private MemberMapper memberMapper;
 
     @Override
-    public void insertMember(MemberVO member) {
+    public void registerMember(MemberVO member) {
         memberMapper.insertMember(member);
     }
 
     @Override
-    public MemberVO selectMember(Long num) {
-        return memberMapper.selectMember(num);
+    public MemberVO getMemberById(String id) {
+        return memberMapper.selectMemberById(id);
     }
 
     @Override
-    public MemberVO selectMemberById(String id) {
-        return memberMapper.selectMemberById(id);
+    public List<MemberVO> getMemberList() {
+        return memberMapper.selectMemberList();
     }
 }

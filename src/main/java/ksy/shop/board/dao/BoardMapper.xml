@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksy.shop.board.dao.BoardMapper">
+    <insert id="insertBoard" parameterType="boardVO">
+        INSERT INTO board
+        VALUES (board_seq.nextval, #{title}, #{content}, SYSDATE, #{member.num})
+    </insert>
+
+    <resultMap id="board" type="boardVO">
+        <id property="num" column="num"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="reg_date" column="reg_date"/>
+        
+        <association property="member" javaType="memberVO">
+            <id property="num" column="mem_num"/>
+            <result property="id" column="id"/>
+            <result property="password" column="password"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+    <select id="selectBoardList" resultMap="board">
+        SELECT *
+        FROM board b JOIN MEMBER m ON b.mem_num = m.num
+    </select>
+</mapper>

@@ -8,14 +8,13 @@
         INSERT INTO member (num,name,id,password)
         VALUES(member_seq.nextval, #{name}, #{id}, #{password})
     </insert>
-    <select id="selectMember" parameterType="long" resultType="memberVO">
-        SELECT *
-        FROM member
-        WHERE num = #{num}
-    </select>
     <select id="selectMemberById" parameterType="string" resultType="memberVO">
         SELECT *
         FROM member
         WHERE id = #{id}
+    </select>
+    <select id="selectMemberList" resultType="memberVO">
+        SELECT *
+        FROM member
     </select>
 </mapper>

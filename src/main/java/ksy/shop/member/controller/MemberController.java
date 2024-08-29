@@ -6,8 +6,11 @@ import ksy.shop.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -16,7 +19,14 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/member")
-    public String member(){
+    public String member(Model model, HttpSession session){
+
+        MemberVO user = (MemberVO)session.getAttribute("user");
+        if(user!=null){
+            //회원 목록 보여주기
+            List<MemberVO> memberList = memberService.getMemberList();
+            model.addAttribute("memberList",memberList);
+        }
 
         return "/member/list";
     }
@@ -28,7 +38,7 @@ public class MemberController {
     }
     @PostMapping("/member/register")
     public String register(MemberVO member){
-        memberService.insertMember(member);
+        memberService.registerMember(member);
         return "redirect:/member";
     }
 
@@ -39,7 +49,7 @@ public class MemberController {
     @PostMapping("/member/logIn")
     public String logIn(MemberVO member, HttpSession session){
         // 입력한 아이디로 member 객체 조회
-        MemberVO user = memberService.selectMemberById(member.getId());
+        MemberVO user = memberService.getMemberById(member.getId());
         // 입력한 아이디로 조회한 member의 password와 입력한 password 비교
         if(user!=null && member.getPassword().equals(user.getPassword())){
             //로그인 성공
@@ -58,5 +68,11 @@ public class MemberController {
             session.invalidate();
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/member/myPage")
+    public String myPage(){
+
+        return "/member/myPage";
     }
 }
