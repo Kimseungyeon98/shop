@@ -4,11 +4,13 @@ import jakarta.servlet.http.HttpSession;
 import ksy.shop.board.service.BoardService;
 import ksy.shop.board.vo.BoardVO;
 import ksy.shop.member.vo.MemberVO;
+import ksy.shop.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -42,5 +44,14 @@ public class BoardController {
 
         boardService.registerBoard(board);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/board/detail/{num}")
+    public String detail(@PathVariable("num") Long num, Model model){
+        BoardVO board = boardService.getBoard(num);
+
+        board.setReg_date(DateUtil.formattingDate(board.getReg_date()));
+        model.addAttribute("board", board);
+        return "/board/detail";
     }
 }

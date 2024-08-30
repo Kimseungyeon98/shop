@@ -24,4 +24,9 @@ public class BoardServiceImpl implements BoardService{
     public List<BoardVO> selectBoardList() {
         return boardMapper.selectBoardList();
     }
+
+    @Override
+    public BoardVO getBoard(Long num) {
+        return boardMapper.selectBoard(num);
+    }
 }

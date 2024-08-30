@@ -7,4 +7,5 @@ import java.util.List;
 public interface BoardService {
     public void registerBoard(BoardVO board);
     public List<BoardVO> selectBoardList();
+    public BoardVO getBoard(Long num);
 }

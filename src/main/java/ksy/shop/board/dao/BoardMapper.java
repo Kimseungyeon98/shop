@@ -9,4 +9,5 @@ import java.util.List;
 public interface BoardMapper {
     public void insertBoard(BoardVO board);
     public List<BoardVO> selectBoardList();
+    public BoardVO selectBoard(Long num);
 }

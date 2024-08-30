@@ -24,6 +24,11 @@
     </resultMap>
     <select id="selectBoardList" resultMap="board">
         SELECT *
-        FROM board b JOIN MEMBER m ON b.mem_num = m.num
+        FROM board b JOIN member m ON b.mem_num = m.num
+    </select>
+    <select id="selectBoard" resultMap="board" parameterType="long">
+        SELECT *
+        FROM board b JOIN member m ON b.mem_num = m.num
+        WHERE b.num=#{num}
     </select>
 </mapper>
