@@ -12,5 +12,6 @@
     <h1>메인페이지</h1>
     <a href="/member">회원 카테고리</a>
     <a href="/board">게시판 카테고리</a>
+    <a href="/item">상품 카테고리</a>
 </body>
 </html>
