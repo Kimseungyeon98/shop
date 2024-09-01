@@ -14,6 +14,7 @@ public class ItemVO {
     private Long price;
     private String image;
     private String reg_date;
+    private Long quantity;
 
     private MemberVO member;
 }

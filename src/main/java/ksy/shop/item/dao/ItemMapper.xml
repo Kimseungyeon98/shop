@@ -6,7 +6,7 @@
 <mapper namespace="ksy.shop.item.dao.ItemMapper">
     <insert id="insertItem" parameterType="itemVO">
         INSERT INTO item
-        VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{member.num})
+        VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{member.num}, #{quantity})
     </insert>
 
     <resultMap id="item" type="itemVO">
@@ -17,12 +17,23 @@
         <result property="price" column="price"/>
         <result property="image" column="image"/>
         <result property="reg_date" column="reg_date"/>
+        <result property="quantity" column="quantity"/>
 
         <association property="member" javaType="memberVO">
             <id property="num" column="mem_num"/>
-            <result property="id" column="id"/>
-            <result property="password" column="password"/>
-            <result property="name" column="name"/>
+            <result property="id" column="mem_id"/>
+            <result property="name" column="mem_name"/>
         </association>
     </resultMap>
+
+    <select id="selectItemList" resultMap="item" parameterType="map">
+        SELECT *
+        FROM (
+            SELECT i.num,i.name,i.type,i.content,i.price,i.image,i.reg_date, i.mem_num,i.quantity,m.name as mem_name,m.id as mem_id, ROWNUM rnum
+            FROM item i
+            JOIN member m ON i.mem_num = m.num
+            WHERE #{endNum} >= ROWNUM
+        )
+        WHERE rnum >= #{startNum}
+    </select>
 </mapper>

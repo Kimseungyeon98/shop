@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 @Transactional
 public class ItemServiceImpl implements ItemService{
@@ -16,5 +19,10 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public void registerItem(ItemVO item) {
         itemMapper.insertItem(item);
+    }
+
+    @Override
+    public List<ItemVO> getItemList(Map<String, String> map) {
+        return itemMapper.selectItemList(map);
     }
 }

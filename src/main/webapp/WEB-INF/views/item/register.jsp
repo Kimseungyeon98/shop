@@ -32,6 +32,10 @@
                 <label for="image">상품 이미지
                 <input type="file" accept=".*" name="image" id="image">
                 <br>
+                quantity
+                <label for="quantity">상품 수량
+                <input type="number" name="quantity" id="quantity">
+                <br>
                 <input type="submit" value="등록">
                 <button onclick="history.back()">뒤로가기</button>
             </form>
