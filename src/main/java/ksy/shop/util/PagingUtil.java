@@ -22,6 +22,7 @@ public class PagingUtil {
         map.put("startRow", startRow);
         map.put("endRow", endRow);
         map.put("currentPage", currentPage);
+        map.put("itemNum",itemNum);
 
         return map;
     }
