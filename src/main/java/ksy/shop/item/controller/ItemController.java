@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpSession;
 import ksy.shop.item.service.ItemService;
 import ksy.shop.item.vo.ItemVO;
 import ksy.shop.member.vo.MemberVO;
+import ksy.shop.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,8 @@ public class ItemController {
     private ItemService itemService;
 
     @GetMapping("/item")
-    public String item(Model model, @RequestParam(defaultValue = "0") String startNum, @RequestParam(defaultValue = "5") String endNum){
-        Map<String,String> map = new HashMap<>();
-        map.put("startNum", startNum);
-        map.put("endNum", endNum);
+    public String item(Model model, @RequestParam(defaultValue = "1") String currentPage, @RequestParam(defaultValue = "5") String itemNum){
+        Map<String,String> map = PagingUtil.paging(currentPage,itemNum);
         List<ItemVO> itemList = itemService.getItemList(map);
 
         model.addAttribute("itemList", itemList);

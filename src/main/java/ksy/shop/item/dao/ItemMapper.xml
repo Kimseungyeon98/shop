@@ -32,8 +32,8 @@
             SELECT i.num,i.name,i.type,i.content,i.price,i.image,i.reg_date, i.mem_num,i.quantity,m.name as mem_name,m.id as mem_id, ROWNUM rnum
             FROM item i
             JOIN member m ON i.mem_num = m.num
-            WHERE #{endNum} >= ROWNUM
+            WHERE #{endRow} >= ROWNUM
         )
-        WHERE rnum >= #{startNum}
+        WHERE rnum >= #{startRow}
     </select>
 </mapper>
