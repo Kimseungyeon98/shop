@@ -25,6 +25,7 @@ public class ItemController {
 
     @GetMapping("/item")
     public String item(Model model, @RequestParam(defaultValue = "1") String currentPage, @RequestParam(defaultValue = "5") String itemNum){
+        //페이징 처리
         Map<String,String> map = PagingUtil.paging(currentPage,itemNum);
         List<ItemVO> itemList = itemService.getItemList(map);
 
