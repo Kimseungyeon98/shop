@@ -27,6 +27,7 @@ public class ItemController {
     public String item(Model model, @RequestParam(defaultValue = "1") String currentPage, @RequestParam(defaultValue = "5") String itemNum){
         //페이징 처리
         Map<String,String> map = PagingUtil.paging(currentPage,itemNum);
+        System.out.println(map);
         List<ItemVO> itemList = itemService.getItemList(map);
         //다음 페이지를 어떻게 처리할건지 생각해봐야함
         //기존에 페이징 처리를 html로 작성해서 반환하던 PagingUtil이 아니기 때문에 어떤식으로 반환할건지 생각해보자

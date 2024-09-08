@@ -11,13 +11,15 @@ public class PagingUtil {
     // currentPage : 현재 페이지
     // itemNum : 한 페이지의 아이템 갯수
 
+    // totalItem : 아이템의 총 갯수
+
     public static Map<String,String> paging(String currentPage, String itemNum){
         int currentPageTmp = Integer.parseInt(currentPage);
         int itemNumTmp = Integer.parseInt(itemNum);
 
         Map<String,String> map = new HashMap<>();
         String startRow = String.valueOf(((currentPageTmp-1)*(itemNumTmp))+1);
-        String endRow = String.valueOf(((currentPageTmp)*(itemNumTmp))+1);
+        String endRow = String.valueOf((currentPageTmp)*(itemNumTmp));
 
         map.put("startRow", startRow);
         map.put("endRow", endRow);
