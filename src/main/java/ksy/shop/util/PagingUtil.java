@@ -12,6 +12,7 @@ public class PagingUtil {
     // itemNum : 한 페이지의 아이템 갯수
 
     // totalItem : 아이템의 총 갯수
+    // 메서드 추가로 만들어야함
 
     public static Map<String,String> paging(String currentPage, String itemNum){
         int currentPageTmp = Integer.parseInt(currentPage);
