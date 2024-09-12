@@ -31,6 +31,7 @@ public class ItemController {
         List<ItemVO> itemList = itemService.getItemList(map);
         //다음 페이지를 어떻게 처리할건지 생각해봐야함
         //기존에 페이징 처리를 html로 작성해서 반환하던 PagingUtil이 아니기 때문에 어떤식으로 반환할건지 생각해보자
+        //생각
 
         model.addAttribute("itemList", itemList);
         return "/item/list";
