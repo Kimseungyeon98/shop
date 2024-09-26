@@ -8,6 +8,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html> 
     <head> 
@@ -28,6 +29,14 @@
                 </tr>
                 </c:forEach>
             </table>
+            <div style="display:flex">
+                <c:if test="${currentPage>=2}">
+                    <a href="/item?currentPage=${currentPage-1}">이전</a>
+                </c:if>
+                <c:if test="${currentPage*itemNum<totalCount}">
+                    <a href="/item?currentPage=${currentPage+1}">다음</a>
+                </c:if>
+            </div>
         </div>
         <button onclick="history.back()">뒤로가기</button>
     </body>

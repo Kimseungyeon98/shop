@@ -25,4 +25,9 @@ public class ItemServiceImpl implements ItemService{
     public List<ItemVO> getItemList(Map<String, String> map) {
         return itemMapper.selectItemList(map);
     }
+
+    @Override
+    public int getItemCount() {
+        return itemMapper.selectItemCount();
+    }
 }

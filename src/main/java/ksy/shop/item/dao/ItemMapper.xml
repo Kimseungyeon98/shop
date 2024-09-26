@@ -36,4 +36,9 @@
         )
         WHERE rnum >= #{startRow}
     </select>
+
+    <select id="selectItemCount" parameterType="integer">
+        SELECT COUNT(*)
+        FROM item
+    </select>
 </mapper>

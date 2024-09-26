@@ -8,4 +8,5 @@ import java.util.Map;
 public interface ItemService {
     public void registerItem(ItemVO item);
     public List<ItemVO> getItemList(Map<String,String> map);
+    public int getItemCount();
 }

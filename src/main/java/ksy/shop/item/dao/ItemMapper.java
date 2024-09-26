@@ -10,4 +10,5 @@ import java.util.Map;
 public interface ItemMapper {
     public void insertItem(ItemVO item);
     public List<ItemVO> selectItemList(Map<String,String> map);
+    public int selectItemCount();
 }
