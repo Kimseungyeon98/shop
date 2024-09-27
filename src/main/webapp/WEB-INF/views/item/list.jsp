@@ -25,7 +25,7 @@
                 </tr>
                 <c:forEach items="${itemList}" var="item">
                 <tr>
-                    <td>${item.member.name}</td><td>${item.name}</td><td>${item.type}</td><td>${item.content}</td><td>${item.price}</td><td>${item.reg_date}</td><td>${item.quantity}</td>
+                    <td>${item.member.name}</td><td><a href="/item/detail/${item.num}">${item.name}</a></td><td>${item.type}</td><td>${item.content}</td><td>${item.price}</td><td>${item.reg_date}</td><td>${item.quantity}</td>
                 </tr>
                 </c:forEach>
             </table>

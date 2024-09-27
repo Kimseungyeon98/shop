@@ -9,4 +9,5 @@ public interface ItemService {
     public void registerItem(ItemVO item);
     public List<ItemVO> getItemList(Map<String,String> map);
     public int getItemCount();
+    public ItemVO getItem(Long num);
 }

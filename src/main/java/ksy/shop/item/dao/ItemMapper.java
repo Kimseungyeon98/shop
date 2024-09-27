@@ -11,4 +11,5 @@ public interface ItemMapper {
     public void insertItem(ItemVO item);
     public List<ItemVO> selectItemList(Map<String,String> map);
     public int selectItemCount();
+    public ItemVO selectItem(Long num);
 }

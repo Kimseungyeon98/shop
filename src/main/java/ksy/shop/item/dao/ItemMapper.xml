@@ -41,4 +41,12 @@
         SELECT COUNT(*)
         FROM item
     </select>
+
+    <select id="selectItem" parameterType="long" resultMap="item">
+        SELECT *
+        FROM item i
+        JOIN member m
+        ON i.mem_num = m.num
+        WHERE i.num=#{num}
+    </select>
 </mapper>

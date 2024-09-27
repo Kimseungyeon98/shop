@@ -30,4 +30,9 @@ public class ItemServiceImpl implements ItemService{
     public int getItemCount() {
         return itemMapper.selectItemCount();
     }
+
+    @Override
+    public ItemVO getItem(Long num) {
+        return itemMapper.selectItem(num);
+    }
 }

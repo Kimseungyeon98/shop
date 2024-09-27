@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,7 +28,6 @@ public class ItemController {
     public String item(Model model, @RequestParam(defaultValue = "1") String currentPage, @RequestParam(defaultValue = "5") String itemNum){
         //페이징 처리
         Map<String,String> map = PagingUtil.paging(currentPage,itemNum);
-        System.out.println(map);
         List<ItemVO> itemList = itemService.getItemList(map);
         int totalCount = itemService.getItemCount();
 
@@ -56,5 +56,12 @@ public class ItemController {
             itemService.registerItem(item);
         }
         return "/item/list";
+    }
+
+    @GetMapping("/item/detail/{itemNum}")
+    public String detail(@PathVariable("itemNum") Long itemNum, Model model){
+        ItemVO item = itemService.getItem(itemNum);
+        model.addAttribute("item", item);
+        return "/item/detail";
     }
 }
