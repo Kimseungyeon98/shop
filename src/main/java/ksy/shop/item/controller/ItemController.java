@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,15 +48,19 @@ public class ItemController {
         return "/item/register";
     }
     @PostMapping("/item/register")
-    public String register(HttpSession session, ItemVO item){
+    public String register(HttpSession session, ItemVO item, @RequestParam MultipartFile file){
         MemberVO user = (MemberVO)session.getAttribute("user");
         if(user==null){
             return "/member/login";
         } else {
             item.setMember(user);
-            itemService.registerItem(item);
         }
-        return "/item/list";
+        item.setImage(file.getOriginalFilename());
+        // 파일 업로드 경로 설정
+        // 파일 업로드 로직
+
+        itemService.registerItem(item);
+        return "redirect:/item/list";
     }
 
     @GetMapping("/item/detail/{itemNum}")

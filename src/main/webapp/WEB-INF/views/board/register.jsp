@@ -16,13 +16,11 @@
     <body>
         <h1>글 쓰기</h1>
         <form action="/board/register" method="post">
-            <div>
-                <label for="title">제목
-                <input type="text" name="title" id="title" required>
-                <br>
-                <label for="content">내용
-                <textarea rows="7" cols="20" name="content" id="title" required></textarea>
-            </div>
+            <label for="title">제목
+            <input type="text" name="title" id="title" required>
+            <br>
+            <label for="content">내용
+            <textarea rows="7" cols="20" name="content" id="content" required></textarea>
             <input type="submit" value="등록">
             <button onclick="history.back()">뒤로가기</button>
         </form>
