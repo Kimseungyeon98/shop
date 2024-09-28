@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface BoardService {
     public void registerBoard(BoardVO board);
-    public List<BoardVO> selectBoardList();
+    public List<BoardVO> selectBoardList(String keyword);
     public BoardVO getBoard(Long num);
 }

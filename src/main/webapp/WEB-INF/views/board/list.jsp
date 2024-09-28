@@ -10,10 +10,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html> 
-    <head> 
+    <head>
         <meta charset="utf-8">
+        <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
         <title>게시판 목록</title>
-    </head> 
+    </head>
     <body>
         <h1>게시판 목록</h1>
         <button onclick="history.back()">메인으로</button>
@@ -29,7 +30,7 @@
             등록된 글이 없습니다!
         </c:if>
         <c:if test="${!empty boardList}">
-        <table>
+        <table id="board">
             <tr>
                 <th>제목</th><th>작성자</th><th>내용</th><th>작성일</th>
             </tr>
@@ -40,5 +41,33 @@
             </c:forEach>
         </table>
         </c:if>
+        <form action="/board" method="get">
+            <label for="keyword">
+                <input type="text" name="keyword" id="keyword">
+            </label>
+        </form>
     </body>
+<script>
+    $(function () {
+        $('#keyword').keyup(function(){
+            $.ajax({
+                url: "/board/search-ajax",
+                type: "GET",
+                dataType: 'json',
+                data: {keyword:$('#keyword').val()},
+                success: function(boardList){
+                    let html = '';
+                    html += '<tr><th>제목</th><th>작성자</th><th>내용</th><th>작성일</th></tr>';
+                    for(let i=0; i<boardList.length; i++){
+                        html += '<tr><th>'+boardList[i].title+'</th><th>'+boardList[i].member.name+'</th><th>'+boardList[i].content+'</th><th>'+boardList[i].reg_date+'</th></tr>'
+                    }
+                    $('#board').empty().append(html);
+                },
+                error: function(){
+                    alert("Test: Error");
+                }
+            });
+        });
+    });
+</script>
 </html>

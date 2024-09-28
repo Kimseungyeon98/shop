@@ -22,9 +22,12 @@
             <result property="name" column="name"/>
         </association>
     </resultMap>
-    <select id="selectBoardList" resultMap="board">
+    <select id="selectBoardList" resultMap="board" parameterType="string">
         SELECT *
         FROM board b JOIN member m ON b.mem_num = m.num
+        <if test="keyword != null and keyword != ''">
+            WHERE b.title LIKE '%' || #{keyword} || '%'
+        </if>
     </select>
     <select id="selectBoard" resultMap="board" parameterType="long">
         SELECT *
