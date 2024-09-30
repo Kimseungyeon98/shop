@@ -13,6 +13,11 @@
         FROM member
         WHERE id = #{id}
     </select>
+    <select id="selectMember" parameterType="long" resultType="memberVO">
+        SELECT *
+        FROM member
+        WHERE num = #{num}
+    </select>
     <select id="selectMemberList" resultType="memberVO">
         SELECT *
         FROM member

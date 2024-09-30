@@ -4,11 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksy.shop.item.dao.ItemMapper">
-    <insert id="insertItem" parameterType="itemVO">
-        INSERT INTO item
-        VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{member.num}, #{quantity})
-    </insert>
-
     <resultMap id="item" type="itemVO">
         <id property="num" column="num"/>
         <result property="name" column="name"/>
@@ -25,6 +20,11 @@
             <result property="name" column="mem_name"/>
         </association>
     </resultMap>
+
+    <insert id="insertItem" parameterType="itemVO">
+        INSERT INTO item
+        VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{member.num}, #{quantity})
+    </insert>
 
     <select id="selectItemList" resultMap="item" parameterType="map">
         SELECT *
@@ -43,10 +43,38 @@
     </select>
 
     <select id="selectItem" parameterType="long" resultMap="item">
-        SELECT *
+        SELECT i.num,i.name,i.type,i.content,i.price,i.image,i.reg_date, i.mem_num,i.quantity,m.name as mem_name,m.id as mem_id
         FROM item i
         JOIN member m
         ON i.mem_num = m.num
         WHERE i.num=#{num}
     </select>
+
+
+
+
+    <resultMap id="item_cart" type="item_CartVO">
+        <id property="num" column="num"/>
+        <result property="reg_date" column="reg_date"/>
+        <association property="member" javaType="memberVO">
+            <id property="num" column="mem_num"/>
+            <result property="id" column="mem_id"/>
+            <result property="name" column="mem_name"/>
+        </association>
+        <association property="item" javaType="itemVO">
+            <id property="num" column="item_num"/>
+            <result property="name" column="item_name"/>
+            <result property="type" column="item_type"/>
+            <result property="content" column="item_content"/>
+            <result property="price" column="item_price"/>
+            <result property="image" column="item_image"/>
+            <result property="reg_date" column="item_reg_date"/>
+            <result property="quantity" column="item_quantity"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertItem_Cart" parameterType="item_CartVO">
+        INSERT INTO ITEM_CART
+        VALUES(item_cart_seq.nextval, #{member.num}, #{item.num}, SYSDATE)
+    </insert>
 </mapper>

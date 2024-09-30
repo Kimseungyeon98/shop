@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
+    public MemberVO getMember(Long num){
+        return memberMapper.selectMember(num);
+    }
+
+    @Override
     public List<MemberVO> getMemberList() {
         return memberMapper.selectMemberList();
     }

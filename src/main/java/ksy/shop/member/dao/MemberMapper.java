@@ -11,6 +11,8 @@ public interface MemberMapper {
     public void insertMember(MemberVO member);
     //아이디로 회원 찾기
     public MemberVO selectMemberById(String id);
+    //회원번호로 회원 찾기
+    public MemberVO selectMember(Long num);
     //회원 리스트
     public List<MemberVO> selectMemberList();
 }

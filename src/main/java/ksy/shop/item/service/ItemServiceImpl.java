@@ -2,6 +2,7 @@ package ksy.shop.item.service;
 
 import ksy.shop.item.dao.ItemMapper;
 import ksy.shop.item.vo.ItemVO;
+import ksy.shop.item.vo.Item_CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +35,13 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public ItemVO getItem(Long num) {
         return itemMapper.selectItem(num);
+    }
+
+
+
+
+    @Override
+    public void registerItem_cart(Item_CartVO item_cartVO){
+        itemMapper.insertItem_Cart(item_cartVO);
     }
 }
