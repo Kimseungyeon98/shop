@@ -7,4 +7,5 @@ public class DateUtil {
     public static String formattingDate(String date){
         return date.substring(0,10).replaceAll(":","");
     }
+
 }
