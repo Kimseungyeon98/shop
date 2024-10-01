@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,5 +44,15 @@ public class ItemServiceImpl implements ItemService{
     @Override
     public void registerItem_cart(Item_CartVO item_cartVO){
         itemMapper.insertItem_Cart(item_cartVO);
+    }
+
+    @Override
+    public Item_CartVO getItem_Cart(Map<String, Long> map) {
+        return itemMapper.selectItem_Cart(map);
+    }
+
+    @Override
+    public List<Item_CartVO> getItem_CartList(Long mem_num) {
+        return itemMapper.selectItem_CartList(mem_num);
     }
 }

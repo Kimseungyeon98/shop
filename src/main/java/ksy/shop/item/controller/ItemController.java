@@ -3,6 +3,7 @@ package ksy.shop.item.controller;
 import jakarta.servlet.http.HttpSession;
 import ksy.shop.item.service.ItemService;
 import ksy.shop.item.vo.ItemVO;
+import ksy.shop.item.vo.Item_CartVO;
 import ksy.shop.member.vo.MemberVO;
 import ksy.shop.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -92,5 +93,16 @@ public class ItemController {
         ItemVO item = itemService.getItem(itemNum);
         model.addAttribute("item", item);
         return "/item/detail";
+    }
+
+    @GetMapping("/item/itemCart")
+    public String itemCart(HttpSession session, Model model){
+        MemberVO user = (MemberVO)session.getAttribute("user");
+        if(user != null){
+            List<Item_CartVO> item_cartVOList = itemService.getItem_CartList(user.getNum());
+            model.addAttribute("item_CartList", item_cartVOList);
+        }
+
+        return "/item/itemCart";
     }
 }

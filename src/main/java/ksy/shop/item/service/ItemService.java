@@ -13,4 +13,6 @@ public interface ItemService {
     public ItemVO getItem(Long num);
 
     public void registerItem_cart(Item_CartVO item_cartVO);
+    public Item_CartVO getItem_Cart(Map<String,Long> map);
+    public List<Item_CartVO> getItem_CartList(Long mem_num);
 }

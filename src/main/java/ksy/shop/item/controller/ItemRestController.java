@@ -28,17 +28,26 @@ public class ItemRestController {
     public Map<String,String> registerItemCart(@RequestParam Long mem_num, @RequestParam Long item_num) {
         Map<String,String> map = new HashMap<>();
 
-        Item_CartVO item_cartVO = new Item_CartVO();
+        Map<String,Long> vmap = new HashMap<>();
+        vmap.put("mem_num",mem_num);
+        vmap.put("item_num",item_num);
+        Item_CartVO validation = itemService.getItem_Cart(vmap);
+        if(validation==null){
+            Item_CartVO item_cartVO = new Item_CartVO();
 
-        ItemVO itemVO = itemService.getItem(item_num);
-        item_cartVO.setItem(itemVO);
+            ItemVO itemVO = itemService.getItem(item_num);
+            item_cartVO.setItem(itemVO);
 
-        MemberVO memberVO = memberService.getMember(mem_num);
-        item_cartVO.setMember(memberVO);
+            MemberVO memberVO = memberService.getMember(mem_num);
+            item_cartVO.setMember(memberVO);
 
-        itemService.registerItem_cart(item_cartVO);
+            itemService.registerItem_cart(item_cartVO);
 
-        map.put("success", "success");
+            map.put("success", "장바구니에 성공적으로 추가했습니다.");
+        } else {
+            map.put("fail", "이미 장바구니에 존재하는 상품입니다.");
+        }
+
         return map;
     }
 }

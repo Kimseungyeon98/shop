@@ -60,7 +60,11 @@
                 dataType: "json",
                 data: {mem_num: mem_num, item_num: item_num},
                 success: function(param){
-                    alert(param.success);
+                    if(param.success){
+                        alert(param.success);
+                    } else if(param.fail){
+                        alert(param.fail);
+                    }
                 },
                 error: function(){
                     alert('실패?');

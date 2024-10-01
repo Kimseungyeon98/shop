@@ -77,4 +77,22 @@
         INSERT INTO ITEM_CART
         VALUES(item_cart_seq.nextval, #{member.num}, #{item.num}, SYSDATE)
     </insert>
+    <select id="selectItem_Cart" parameterType="map" resultMap="item_cart">
+        SELECT C.NUM, C.REG_DATE, M.NUM AS MEM_NUM, M.NAME AS MEM_NAME, M.ID AS MEM_ID, I.NUM AS ITEM_NUM, I.NAME AS ITEM_NAME, I.TYPE AS ITEM_TYPE, I.CONTENT AS ITEM_CONTENT, I.PRICE AS ITEM_PRICE, I.IMAGE AS ITEM_IMAGE, I.REG_DATE AS ITEM_REG_DATE, I.QUANTITY AS ITEM_QUANTITY
+        FROM ITEM_CART C
+        JOIN MEMBER M
+        ON C.MEM_NUM = M.NUM
+        JOIN ITEM I
+        ON C.ITEM_NUM = I.NUM
+        WHERE C.MEM_NUM=#{mem_num} AND C.ITEM_NUM=#{item_num}
+    </select>
+    <select id="selectItem_CartList" parameterType="long" resultMap="item_cart">
+        SELECT C.NUM, C.REG_DATE, M.NUM AS MEM_NUM, M.NAME AS MEM_NAME, M.ID AS MEM_ID, I.NUM AS ITEM_NUM, I.NAME AS ITEM_NAME, I.TYPE AS ITEM_TYPE, I.CONTENT AS ITEM_CONTENT, I.PRICE AS ITEM_PRICE, I.IMAGE AS ITEM_IMAGE, I.REG_DATE AS ITEM_REG_DATE, I.QUANTITY AS ITEM_QUANTITY
+        FROM ITEM_CART C
+        JOIN MEMBER M
+        ON C.MEM_NUM = M.NUM
+        JOIN ITEM I
+        ON C.ITEM_NUM = I.NUM
+        WHERE C.MEM_NUM=#{mem_num}
+    </select>
 </mapper>

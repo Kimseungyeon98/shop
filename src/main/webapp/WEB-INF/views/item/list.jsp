@@ -17,7 +17,10 @@
     </head> 
     <body>
         <h1>상품 목록</h1>
-        <c:if test="${!empty user}"><button onclick="location.href='/item/register'">상품 등록</button></c:if>
+        <c:if test="${!empty user}">
+            <button onclick="location.href='/item/register'">상품 등록</button>
+            <button onclick="location.href='/item/itemCart'">내 장바구니</button>
+        </c:if>
         <div>
             <table>
                 <tr>

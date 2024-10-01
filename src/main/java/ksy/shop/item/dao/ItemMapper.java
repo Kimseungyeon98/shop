@@ -17,4 +17,6 @@ public interface ItemMapper {
 
 
     public void insertItem_Cart(Item_CartVO item_cart);
+    public Item_CartVO selectItem_Cart(Map<String,Long> map);
+    public List<Item_CartVO> selectItem_CartList(Long mem_num);
 }
