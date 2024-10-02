@@ -82,6 +82,8 @@ public class ItemController {
             file.transferTo(new File(uploadPath.getAbsolutePath() + File.separator + storeFileName));
 
             item.setImage(storeFileName);
+        } else{
+            item.setImage("");
         }
 
         itemService.registerItem(item);

@@ -33,6 +33,7 @@
             FROM item i
             JOIN member m ON i.mem_num = m.num
             WHERE #{endRow} >= ROWNUM
+            ORDER BY i.num DESC
         )
         WHERE rnum >= #{startRow}
     </select>
