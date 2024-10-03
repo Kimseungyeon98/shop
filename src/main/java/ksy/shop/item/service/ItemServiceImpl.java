@@ -55,4 +55,9 @@ public class ItemServiceImpl implements ItemService{
     public List<Item_CartVO> getItem_CartList(Long mem_num) {
         return itemMapper.selectItem_CartList(mem_num);
     }
+
+    @Override
+    public void cancleItem_Cart(Long mem_num, Long item_num) {
+        itemMapper.deleteItem_Cart(mem_num, item_num);
+    }
 }

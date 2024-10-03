@@ -15,4 +15,5 @@ public interface ItemService {
     public void registerItem_cart(Item_CartVO item_cartVO);
     public Item_CartVO getItem_Cart(Map<String,Long> map);
     public List<Item_CartVO> getItem_CartList(Long mem_num);
+    public void cancleItem_Cart(Long mem_num,Long item_num);
 }

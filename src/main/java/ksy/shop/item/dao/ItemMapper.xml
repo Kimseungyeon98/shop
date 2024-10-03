@@ -96,4 +96,7 @@
         ON C.ITEM_NUM = I.NUM
         WHERE C.MEM_NUM=#{mem_num}
     </select>
+    <delete id="deleteItem_Cart" parameterType="long">
+        DELETE FROM ITEM_CART WHERE mem_num=#{mem_num} AND item_num=#{item_num}
+    </delete>
 </mapper>

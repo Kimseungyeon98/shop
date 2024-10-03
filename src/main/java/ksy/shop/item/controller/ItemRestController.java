@@ -50,4 +50,20 @@ public class ItemRestController {
 
         return map;
     }
+
+    @GetMapping("item/cancleItemCart")
+    public Map<String,String> cancleItemCart(HttpSession session, @RequestParam Long itemNum) {
+        Map<String,String> map = new HashMap<>();
+
+        MemberVO user = (MemberVO) session.getAttribute("user");
+        Long mem_num = user.getNum();
+        try{
+            itemService.cancleItem_Cart(mem_num,itemNum);
+            map.put("success","success");
+        } catch(Exception e){
+            e.printStackTrace();
+            map.put("fail","fail");
+        }
+        return map;
+    }
 }
