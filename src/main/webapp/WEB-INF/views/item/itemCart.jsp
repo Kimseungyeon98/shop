@@ -20,14 +20,19 @@
     <button onclick="history.back()">뒤로가기</button>
     <table>
         <tr>
-            <th>상품 이름</th><th>상품 가격</th><th>장바구니 추가일</th>
+            <th>선택</th><th>상품 이름</th><th>상품 가격</th><th>장바구니 추가일</th>
         </tr>
         <c:forEach items="${item_CartList}" var="item_Cart">
             <tr>
-                <td>${item_Cart.item.name}</td><td>${item_Cart.item.price}</td><td>${item_Cart.item.reg_date}</td><td><button onclick="cancle('${item_Cart.item.num}')">삭제</button></td>
+                <td><input type="checkbox" value="${item_Cart.item.price}" class="checkBox"></td><td>${item_Cart.item.name}</td><td>${item_Cart.item.price}</td><td>${item_Cart.item.reg_date}</td><td><button onclick="cancle('${item_Cart.item.num}')">삭제</button></td>
             </tr>
         </c:forEach>
     </table>
+    <div>
+        <div>
+            총 가격: <span id="total_price"></span>
+        </div>
+    </div>
 </body>
 <script>
     function cancle(itemNum){
@@ -49,5 +54,21 @@
             }
         })
     }
+    var total_price = 0;
+    $('.checkBox').change(function() {
+        var price = parseInt($(this).val());
+
+        // 체크가 되었을 경우 총 가격에 추가
+        if ($(this).is(':checked')) {
+            total_price += price;
+        }
+        // 체크가 해제되었을 경우 총 가격에서 해당 가격을 뺌
+        else {
+            total_price -= price;
+        }
+
+        // 총 가격을 업데이트
+        $('#total_price').text(total_price + '원');
+    });
 </script>
 </html>
