@@ -29,12 +29,11 @@
     <select id="selectItemList" resultMap="item" parameterType="map">
         SELECT *
         FROM (
-            SELECT i.num,i.name,i.type,i.content,i.price,i.image,i.reg_date, i.mem_num,i.quantity,m.name as mem_name,m.id as mem_id, ROWNUM rnum
-            FROM item i
-            JOIN member m ON i.mem_num = m.num
-            WHERE #{endRow} >= ROWNUM
-            ORDER BY i.num DESC
-        )
+             SELECT i.num,i.name,i.type,i.content,i.price,i.image,i.reg_date, i.mem_num,i.quantity,m.name as mem_name,m.id as mem_id, ROWNUM rnum
+             FROM (select * from item order by num desc) i
+                      JOIN member m ON i.mem_num = m.num
+             WHERE #{endRow} >= ROWNUM
+             )
         WHERE rnum >= #{startRow}
     </select>
 

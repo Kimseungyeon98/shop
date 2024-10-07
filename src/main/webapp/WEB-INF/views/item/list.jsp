@@ -24,11 +24,32 @@
         <div>
             <table>
                 <tr>
-                    <th>등록자 이름</th><th>상품 이름</th><th>상품 종류</th><th>상품 내용</th><th>상품 가격</th><th>상품 등록일</th><th>상품 수량</th>
+                    <th>등록자 이름</th>
+                    <th>상품 이름</th>
+                    <th>상품 이미지</th>
+                    <th>상품 종류</th>
+                    <th>상품 내용</th>
+                    <th>상품 가격</th>
+                    <th>상품 등록일</th>
+                    <th>상품 수량</th>
                 </tr>
                 <c:forEach items="${itemList}" var="item">
                 <tr>
-                    <td>${item.member.name}</td><td><a href="/item/detail/${item.num}">${item.name}</a></td><td>${item.type}</td><td>${item.content}</td><td>${item.price}</td><td>${item.reg_date}</td><td>${item.quantity}</td>
+                    <td>${item.member.name}</td>
+                    <td><a href="/item/detail/${item.num}">${item.name}</a></td>
+                    <td>
+                        <c:if test="${!empty item.image}">
+                            <img src="/upload/${item.image}" alt="상품 이미지" height="50px" width="50px">
+                        </c:if>
+                        <c:if test="${empty item.image}">
+                            <img src="/upload/noImage.png" alt="상품 이미지" height="50px" width="50px">
+                        </c:if>
+                    </td>
+                    <td>${item.type}</td>
+                    <td>${item.content}</td>
+                    <td>${item.price}</td>
+                    <td>${item.reg_date}</td>
+                    <td>${item.quantity}</td>
                 </tr>
                 </c:forEach>
             </table>
