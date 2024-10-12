@@ -30,7 +30,7 @@
     </table>
     <div>
         <div>
-            총 가격: <span id="total_price"></span>
+            <span id="total_price" style="color:red;"></span>
         </div>
     </div>
 </body>
@@ -57,7 +57,6 @@
     var total_price = 0;
     $('.checkBox').change(function() {
         var price = parseInt($(this).val());
-
         // 체크가 되었을 경우 총 가격에 추가
         if ($(this).is(':checked')) {
             total_price += price;
@@ -66,9 +65,8 @@
         else {
             total_price -= price;
         }
-
         // 총 가격을 업데이트
-        $('#total_price').text(total_price + '원');
+        $('#total_price').text('총 가격 ' + total_price + ' 원');
     });
 </script>
 </html>
