@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ksy.shop.reservation.dao.ReservationMapper">
+    <!--insert-->
+    <insert id="insertReservation" parameterType="reservationVO">
+
+    </insert>
+
+    <!--select-->
+    <select id="selectReservationByNum" parameterType="long" resultType="reservationVO">
+
+    </select>
+    <select id="selectReservationByMemNum" parameterType="long" resultType="reservationVO">
+
+    </select>
+
+
+    <!--update-->
+    <update id="updateReservation" parameterType="reservationVO">
+
+    </update>
+
+    <!--delete-->
+    <delete id="deleteReservaitonByNum" parameterType="long">
+
+    </delete>
+</mapper>
