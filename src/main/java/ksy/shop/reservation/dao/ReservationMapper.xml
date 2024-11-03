@@ -6,7 +6,7 @@
 <mapper namespace="ksy.shop.reservation.dao.ReservationMapper">
     <!--insert-->
     <insert id="insertReservation" parameterType="reservationVO">
-
+        INSERT INTO RESERVATION VALUES ()
     </insert>
 
     <!--select-->
