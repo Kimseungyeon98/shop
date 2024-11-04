@@ -1,10 +1,14 @@
 package ksy.shop.reservation.controller;
 
+import jakarta.servlet.http.HttpSession;
+import ksy.shop.member.vo.MemberVO;
 import ksy.shop.reservation.service.ReservationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 
 @Controller
 @Slf4j
@@ -15,17 +19,31 @@ public class ReservationController {
     // 예약 메인 페이지
     @GetMapping("/reservations")
     public String mainReservation(){
-
-
-        return "reservation";
+        // 로그인 되어 있을 때만 진입 가능
+        // 단, restful 하게 설계 하기 위해서 session으로 처리하지 않고 jwt나 Oauth를 사용해야함
+        
+        return "reservation/main";
     }
 
     // 예약 생성 페이지(회원번호)
     @PostMapping("/reservations")
-    public String createReservation(){
+    @ResponseBody
+    public HashMap<String,String> createReservation(HttpSession session){
+        HashMap<String,String> map = new HashMap<>();
+        MemberVO user = (MemberVO)session.getAttribute("user");
+
+        //로그인 확인
+        if(user!=null){
+            /* 예약 로직 시작 */
 
 
-        return "reservation";
+            /* 예약 로직 끝 */
+            map.put("result", "예약 성공");
+        } else {
+            map.put("result", "예약 실패 (로그인 안하신듯?)");
+        }
+
+        return map;
     }
 
     // 예약 조회 페이지(예약번호)

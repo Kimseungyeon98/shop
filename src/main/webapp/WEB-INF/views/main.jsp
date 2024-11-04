@@ -18,6 +18,7 @@
             <div class="p-3 fw-bold fs-5 border" style="cursor:pointer;" onclick="location.href='/member'">회원 카테고리</div>
             <div class="p-3 fw-bold fs-5 border" style="cursor:pointer;" onclick="location.href='/board'">게시판 카테고리</div>
             <div class="p-3 fw-bold fs-5 border" style="cursor:pointer;" onclick="location.href='/item'">상품 카테고리</div>
+            <div class="p-3 fw-bold fs-5 border" style="cursor:pointer;" onclick="location.href='/reservations'">예약 카테고리</div>
         </div>
     </div>
 </body>
