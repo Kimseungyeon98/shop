@@ -7,12 +7,12 @@ public interface ReservationService {
     ReservationVO findReservationByNum(Long num);
     ReservationVO findReservationByMemNum(Long mem_num);
 
-    // insert(create)
-    void createReservation(ReservationVO reservation);
+    // insert(save)
+    void saveReservation(ReservationVO reservation);
 
-    // update(modify)
-    void modifyResrver(ReservationVO reservation);
+    // update(update)
+    void updateReservation(ReservationVO reservation);
 
-    //delete(remove)
-    void removeReservationByNum(Long num);
+    // delete(delete)
+    void deleteReservationByNum(Long num);
 }

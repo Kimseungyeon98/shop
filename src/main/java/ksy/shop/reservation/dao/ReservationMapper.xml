@@ -4,27 +4,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksy.shop.reservation.dao.ReservationMapper">
-    <!--insert-->
-    <insert id="insertReservation" parameterType="reservationVO">
-        INSERT INTO RESERVATION VALUES ()
-    </insert>
-
     <!--select-->
     <select id="selectReservationByNum" parameterType="long" resultType="reservationVO">
-
+        SELECT *
+        FROM RESERVATION
+        WHERE NUM=#{num}
     </select>
     <select id="selectReservationByMemNum" parameterType="long" resultType="reservationVO">
-
+        SELECT *
+        FROM RESERVATION
+        WHERE MEM_NUM=#{mem_num}
     </select>
 
+    <!--insert-->
+    <insert id="insertReservation" parameterType="reservationVO">
+        INSERT INTO RESERVATION
+        VALUES (RESERVATION_SEQ.NEXTVAL, #{name}, #{content}, SYSDATE, #{end_date}, #{price}, #{mem_num})
+    </insert>
 
     <!--update-->
     <update id="updateReservation" parameterType="reservationVO">
-
+        UPDATE RESERVATION
+        SET NAME=#{name},
+            CONTENT=#{content},
+            END_DATE=#{end_date},
+            PRICE=#{price}
+        WHERE NUM=#{num}
     </update>
 
     <!--delete-->
-    <delete id="deleteReservaitonByNum" parameterType="long">
-
+    <delete id="deleteReservationByNum" parameterType="long">
+        DELETE FROM RESERVATION
+        WHERE NUM=#{num}
     </delete>
 </mapper>
