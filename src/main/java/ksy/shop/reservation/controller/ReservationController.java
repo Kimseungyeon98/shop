@@ -3,11 +3,14 @@ package ksy.shop.reservation.controller;
 import jakarta.servlet.http.HttpSession;
 import ksy.shop.member.vo.MemberVO;
 import ksy.shop.reservation.service.ReservationService;
+import ksy.shop.reservation.vo.ReservationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 
 @Controller
@@ -35,7 +38,17 @@ public class ReservationController {
         //로그인 확인
         if(user!=null){
             /* 예약 로직 시작 */
+            ReservationVO reservation = new ReservationVO();
 
+            reservation.setName("차량 렌트");
+            reservation.setContent("GV70 차량 2달 렌트");
+            reservation.setPrice("500000");
+
+            Date date = new Date();
+            date.setMonth(date.getMonth()+2);
+            reservation.setEnd_date(date.toString());
+
+            reservationService.saveReservation(reservation);
 
             /* 예약 로직 끝 */
             map.put("result", "예약 성공");
@@ -48,8 +61,10 @@ public class ReservationController {
 
     // 예약 조회 페이지(예약번호)
     @GetMapping("/reservations/{num}")
-    public String viewReservation(@PathVariable("num") Long num){
+    public String viewReservation(@PathVariable("num") Long num, Model model){
+        ReservationVO reservation = reservationService.findReservationByNum(num);
 
+        model.addAttribute("reservation", reservation);
 
         return "reservation";
     }
@@ -65,8 +80,7 @@ public class ReservationController {
     // 예약 삭제 페이지(예약번호, 회원번호)
     @DeleteMapping("/reservations/{num}")
     public String removeReservation(@PathVariable("num") Long num){
-
-
+        reservationService.deleteReservationByNum(num);
         return "reservation";
     }
 }
