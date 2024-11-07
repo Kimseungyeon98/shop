@@ -15,5 +15,5 @@ public class ReservationVO {
     private String end_date;
     private String price;
 
-    private Long mem_num;
+    private MemberVO member;
 }

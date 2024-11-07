@@ -4,16 +4,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksy.shop.reservation.dao.ReservationMapper">
+    <!--이중 객체 처리-->
+    <resultMap id="reservation" type="reservationVO">
+        <id property="num" column="num"/>
+        <result property="name" column="name"/>
+        <result property="content" column="content"/>
+        <result property="start_date" column="start_date"/>
+        <result property="end_date" column="end_date"/>
+        <result property="price" column="price"/>
+
+        <association property="member" javaType="memberVO">
+            <id property="num" column="mem_num"/>
+            <result property="id" column="mem_id"/>
+            <result property="name" column="mem_name"/>
+        </association>
+    </resultMap>
+
     <!--select-->
-    <select id="selectReservationByNum" parameterType="long" resultType="reservationVO">
-        SELECT *
-        FROM RESERVATION
+    <select id="selectReservationByNum" parameterType="long" resultMap="reservation">
+        SELECT r.*,m.name as mem_name, m.id as mem_id
+        FROM RESERVATION R
+        JOIN MEMBER M ON R.MEM_NUM=M.NUM
         WHERE NUM=#{num}
     </select>
-    <select id="selectReservationByMemNum" parameterType="long" resultType="reservationVO">
-        SELECT *
-        FROM RESERVATION
+    <select id="selectReservationByMemNum" parameterType="long" resultMap="reservation">
+        SELECT r.*,m.name as mem_name, m.id as mem_id
+        FROM RESERVATION R
+        JOIN MEMBER M ON R.MEM_NUM=M.NUM
         WHERE MEM_NUM=#{mem_num}
+    </select>
+    <select id="selectReservationList" resultMap="reservation">
+        SELECT r.*,m.name as mem_name, m.id as mem_id
+        FROM RESERVATION R
+        JOIN MEMBER M ON R.MEM_NUM=M.NUM
     </select>
 
     <!--insert-->

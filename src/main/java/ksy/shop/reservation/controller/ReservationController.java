@@ -1,6 +1,7 @@
 package ksy.shop.reservation.controller;
 
 import jakarta.servlet.http.HttpSession;
+import ksy.shop.member.service.MemberService;
 import ksy.shop.member.vo.MemberVO;
 import ksy.shop.reservation.service.ReservationService;
 import ksy.shop.reservation.vo.ReservationVO;
@@ -10,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -19,12 +22,22 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
+    @Autowired
+    private MemberService memberService;
+
     // 예약 메인 페이지
     @GetMapping("/reservations")
-    public String mainReservation(){
+    public String mainReservation(Model model){
         // 로그인 되어 있을 때만 진입 가능
         // 단, restful 하게 설계 하기 위해서 session으로 처리하지 않고 jwt나 Oauth를 사용해야함
-        
+
+        /* 로그인 처리 시작 */
+
+        /* 로그인 처리 끝 */
+
+        List<ReservationVO> reservationList = reservationService.findReservationList();
+
+        model.addAttribute("reservationList", reservationList);
         return "reservation/main";
     }
 
@@ -40,9 +53,6 @@ public class ReservationController {
             /* 예약 로직 시작 */
             ReservationVO reservation = new ReservationVO();
 
-            reservation.setName("차량 렌트");
-            reservation.setContent("GV70 차량 2달 렌트");
-            reservation.setPrice("500000");
 
             Date date = new Date();
             date.setMonth(date.getMonth()+2);

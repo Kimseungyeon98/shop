@@ -15,3 +15,6 @@ spring:
 mybatis:
   type-aliases-package: ksy.shop.**.vo
   mapper-locations: file:src/main/java/ksy/shop/**/dao/*.xml
+logging:
+  level:
+    '[ksy.shop]': debug
