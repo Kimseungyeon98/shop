@@ -15,7 +15,7 @@
     </head> 
     <body>
         <h1>로그인</h1>
-        <form action="/member/logIn" method="post">
+        <form action="/members/logIn" method="post">
             <label for="id">아이디
             <input type="text" name="id" id="id">
             <label for="password">비밀번호

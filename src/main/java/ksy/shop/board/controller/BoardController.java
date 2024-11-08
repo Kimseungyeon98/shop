@@ -19,14 +19,14 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @GetMapping("/board")
+    @GetMapping("/boards")
     public String board(Model model){
         List<BoardVO> boardList = boardService.selectBoardList(null);
         model.addAttribute("boardList", boardList);
         return "/board/list";
     }
 
-    @GetMapping("/board/search-ajax")
+    @GetMapping("/boards-ajax")
     @ResponseBody
     public List<BoardVO> searchAjax(@RequestParam String keyword){
         List<BoardVO> boardList = boardService.selectBoardList(keyword);
@@ -34,7 +34,7 @@ public class BoardController {
         return boardList;
     }
 
-    @GetMapping("/board/register")
+    @GetMapping("/boards/new")
     public String register(HttpSession session){
         MemberVO user = (MemberVO)session.getAttribute("user");
         if(user != null){
@@ -43,16 +43,16 @@ public class BoardController {
             return "/member/login";
         }
     }
-    @PostMapping("/board/register")
+    @PostMapping("/boards")
     public String register(BoardVO board, HttpSession session){
         MemberVO user = (MemberVO)session.getAttribute("user");
         board.setMember(user);
 
         boardService.registerBoard(board);
-        return "redirect:/board/list";
+        return "redirect:/boards";
     }
 
-    @GetMapping("/board/detail/{num}")
+    @GetMapping("/boards/{num}")
     public String detail(@PathVariable("num") Long num, Model model){
         BoardVO board = boardService.getBoard(num);
 

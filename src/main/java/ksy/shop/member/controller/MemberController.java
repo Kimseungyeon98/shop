@@ -18,7 +18,7 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/member")
+    @GetMapping("/members")
     public String member(Model model, HttpSession session){
 
         MemberVO user = (MemberVO)session.getAttribute("user");
@@ -31,22 +31,22 @@ public class MemberController {
         return "/member/list";
     }
 
-    @GetMapping("/member/register")
+    @GetMapping("/members/new")
     public String register(){
 
         return "/member/register";
     }
-    @PostMapping("/member/register")
+    @PostMapping("/members/new")
     public String register(MemberVO member){
         memberService.registerMember(member);
-        return "redirect:/member";
+        return "redirect:/members";
     }
 
-    @GetMapping("/member/logIn")
+    @GetMapping("/members/logIn")
     public String logIn(){
         return "/member/login";
     }
-    @PostMapping("/member/logIn")
+    @PostMapping("/members/logIn")
     public String logIn(MemberVO member, HttpSession session){
         // 입력한 아이디로 member 객체 조회
         MemberVO user = memberService.getMemberById(member.getId());
@@ -61,7 +61,7 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/member/logOut")
+    @GetMapping("/members/logOut")
     public String logOut(HttpSession session){
         MemberVO user = (MemberVO)session.getAttribute("user");
         if(user!=null){
@@ -70,7 +70,7 @@ public class MemberController {
         return "redirect:/";
     }
 
-    @GetMapping("/member/myPage")
+    @GetMapping("/members/myPage")
     public String myPage(){
 
         return "/member/myPage";

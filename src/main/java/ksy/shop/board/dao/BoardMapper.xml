@@ -4,17 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksy.shop.board.dao.BoardMapper">
-    <insert id="insertBoard" parameterType="boardVO">
-        INSERT INTO board
-        VALUES (board_seq.nextval, #{title}, #{content}, SYSDATE, #{member.num})
-    </insert>
-
     <resultMap id="board" type="boardVO">
         <id property="num" column="num"/>
         <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="reg_date" column="reg_date"/>
-        
+
         <association property="member" javaType="memberVO">
             <id property="num" column="mem_num"/>
             <result property="id" column="id"/>
@@ -22,12 +17,19 @@
             <result property="name" column="name"/>
         </association>
     </resultMap>
+
+    <insert id="insertBoard" parameterType="boardVO">
+        INSERT INTO board
+        VALUES (board_seq.nextval, #{title}, #{content}, SYSDATE, #{member.num})
+    </insert>
+
     <select id="selectBoardList" resultMap="board" parameterType="string">
         SELECT *
         FROM board b JOIN member m ON b.mem_num = m.num
         <if test="keyword != null and keyword != ''">
             WHERE b.title LIKE '%' || #{keyword} || '%'
         </if>
+        ORDER BY REG_DATE DESC
     </select>
     <select id="selectBoard" resultMap="board" parameterType="long">
         SELECT *

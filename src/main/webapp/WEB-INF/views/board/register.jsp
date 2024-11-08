@@ -15,7 +15,7 @@
     </head> 
     <body>
         <h1>글 쓰기</h1>
-        <form action="/board/register" method="post">
+        <form action="/boards" method="post">
             <label for="title">제목
             <input type="text" name="title" id="title" required>
             <br>

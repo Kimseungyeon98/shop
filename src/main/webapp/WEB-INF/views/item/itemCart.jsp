@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1>장바구니</h1>
-    <button onclick="history.back()">뒤로가기</button>
+    <button onclick="location.href='/items'">뒤로가기</button>
     <table>
         <tr>
             <th>선택</th><th>상품 이름</th><th>상품 가격</th><th>장바구니 추가일</th>
@@ -37,8 +37,8 @@
 <script>
     function cancle(itemNum){
         $.ajax({
-            url: '/item/cancleItemCart',
-            type: 'GET',
+            url: '/items/ItemCarts',
+            type: 'DELETE',
             data: {itemNum: itemNum},
             dataType: 'JSON',
             success: function(result){

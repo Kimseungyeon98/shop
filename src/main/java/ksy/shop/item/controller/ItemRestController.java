@@ -8,6 +8,7 @@ import ksy.shop.member.service.MemberService;
 import ksy.shop.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class ItemRestController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/item/registerItemCart")
+    @GetMapping("/items/ItemCarts/new")
     public Map<String,String> registerItemCart(@RequestParam Long mem_num, @RequestParam Long item_num) {
         Map<String,String> map = new HashMap<>();
 
@@ -51,7 +52,7 @@ public class ItemRestController {
         return map;
     }
 
-    @GetMapping("item/cancleItemCart")
+    @DeleteMapping("/items/ItemCarts")
     public Map<String,String> cancleItemCart(HttpSession session, @RequestParam Long itemNum) {
         Map<String,String> map = new HashMap<>();
 

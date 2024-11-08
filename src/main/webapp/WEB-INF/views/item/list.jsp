@@ -18,8 +18,8 @@
     <body>
         <h1>상품 목록</h1>
         <c:if test="${!empty user}">
-            <button onclick="location.href='/item/register'">상품 등록</button>
-            <button onclick="location.href='/item/itemCart'">내 장바구니</button>
+            <button onclick="location.href='/items/new'">상품 등록</button>
+            <button onclick="location.href='/items/itemCarts'">내 장바구니</button>
         </c:if>
         <div>
             <table>
@@ -36,7 +36,7 @@
                 <c:forEach items="${itemList}" var="item">
                 <tr>
                     <td>${item.member.name}</td>
-                    <td><a href="/item/detail/${item.num}">${item.name}</a></td>
+                    <td><a href="/items/${item.num}">${item.name}</a></td>
                     <td>
                         <c:if test="${!empty item.image}">
                             <img src="/upload/${item.image}" alt="상품 이미지" height="50px" width="50px">
@@ -62,6 +62,6 @@
                 </c:if>
             </div>
         </div>
-        <button onclick="history.back()">뒤로가기</button>
+        <button onclick="location.href='/'">뒤로가기</button>
     </body>
 </html>

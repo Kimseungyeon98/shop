@@ -15,7 +15,7 @@
     </head> 
     <body>
         <h1>상품 등록</h1>
-        <form action="/item/register" method="post" enctype="multipart/form-data">
+        <form action="/items/new" method="post" enctype="multipart/form-data">
             <label for="name">상품 이름</label>
             <input type="text" name="name" id="name" required>
             <br>

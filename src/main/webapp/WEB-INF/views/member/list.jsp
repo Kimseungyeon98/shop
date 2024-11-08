@@ -23,13 +23,13 @@
             </c:if>
         </div>
         <div>
-            <a href="/member/register">회원가입
+            <a href="/members/new">회원가입
             <c:if test="${empty user}">
-                <a href="/member/logIn">로그인</a>
+                <a href="/members/logIn">로그인</a>
             </c:if>
             <c:if test="${!empty user}">
-                <a href="/member/logOut">로그아웃</a>
-                <a href="/member/myPage">내 정보</a>
+                <a href="/members/logOut">로그아웃</a>
+                <a href="/members/myPage">내 정보</a>
             </c:if>
         </div>
         <c:if test="${!empty user}">

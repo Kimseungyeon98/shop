@@ -17,10 +17,10 @@
     </head>
     <body>
         <h1>게시판 목록</h1>
-        <button onclick="history.back()">메인으로</button>
+        <button onclick="location.href='/'">메인으로</button>
         <div>
             <c:if test="${!empty user}">
-            <a href="/board/register">글 쓰기</a>
+            <a href="/boards/new">글 쓰기</a>
             </c:if>
             <c:if test="${empty user}">
             <a href="/member/logIn">로그인</a>
@@ -36,7 +36,7 @@
             </tr>
             <c:forEach items="${boardList}" var="board">
             <tr>
-                <td><a href="/board/detail/${board.num}">${board.title}</a></td><td>${board.member.name}</td><td>${board.content}</td><td>${board.reg_date}</td>
+                <td><a href="/boards/${board.num}">${board.title}</a></td><td>${board.member.name}</td><td>${board.content}</td><td>${board.reg_date}</td>
             </tr>
             </c:forEach>
         </table>
@@ -51,7 +51,7 @@
     $(function () {
         $('#keyword').keyup(function(){
             $.ajax({
-                url: "/board/search-ajax",
+                url: "/boards-ajax",
                 type: "GET",
                 dataType: 'json',
                 data: {keyword:$('#keyword').val()},

@@ -15,11 +15,11 @@
     </head> 
     <body>
         <h1>회원가입</h1>
-        <form action="/member/register" method="post">
+        <form action="/members/new" method="post">
             <label for="id">아이디
             <input type="text" name="id" id="id" required>
             <label for="password">비밀번호
-            <input type="text" name="password" id="password" required>
+            <input type="password" name="password" id="password" required>
             <label for="name">이름
             <input type="text" name="name" id="name" required>
             <input type="submit" value="등록">

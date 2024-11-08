@@ -17,7 +17,7 @@
 </head>
 <body>
     <h1>상품 상세</h1>
-    <button onclick="history.back()">뒤로가기</button>
+    <button onclick="location.href='/items'">뒤로가기</button>
     <div>
         <ul style="list-style:none;">
             <li>상품명: ${item.name}</li>
@@ -41,21 +41,21 @@
     function validationUser(user_id){
         if(!user_id){
             if(confirm("상품을 구매하시려면 로그인을 해주세요")){
-                location.href = '/member/logIn';
+                location.href = '/members/logIn';
             }
         } else {
-            location.href = '/item/buy';
+            location.href = '/items/buy';
         }
     }
 
     function registerItemCart(mem_num, item_num) {
         if(!mem_num){
             if(confirm("상품을 장바구니에 추가하시려면 로그인을 해주세요")){
-                location.href = '/member/logIn';
+                location.href = '/members/logIn';
             }
         } else {
             $.ajax({
-                url: "/item/registerItemCart",
+                url: "/items/ItemCarts/new",
                 type: "GET",
                 dataType: "json",
                 data: {mem_num: mem_num, item_num: item_num},

@@ -28,7 +28,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/item")
+    @GetMapping("/items")
     public String item(Model model, @RequestParam(defaultValue = "1") String currentPage, @RequestParam(defaultValue = "5") String itemNum){
         //페이징 처리
         Map<String,String> map = PagingUtil.paging(currentPage,itemNum);
@@ -42,7 +42,7 @@ public class ItemController {
         return "/item/list";
     }
 
-    @GetMapping("/item/register")
+    @GetMapping("/items/new")
     public String register(HttpSession session){
         MemberVO user = (MemberVO)session.getAttribute("user");
         if(user==null){
@@ -50,7 +50,7 @@ public class ItemController {
         }
         return "/item/register";
     }
-    @PostMapping("/item/register")
+    @PostMapping("/items/new")
     public String register(HttpSession session, ItemVO item, @RequestParam MultipartFile file) throws IOException {
         MemberVO user = (MemberVO)session.getAttribute("user");
         if(user==null){
@@ -87,17 +87,17 @@ public class ItemController {
         }
 
         itemService.registerItem(item);
-        return "redirect:/item";
+        return "redirect:/items";
     }
 
-    @GetMapping("/item/detail/{itemNum}")
+    @GetMapping("/items/{itemNum}")
     public String detail(@PathVariable("itemNum") Long itemNum, Model model){
         ItemVO item = itemService.getItem(itemNum);
         model.addAttribute("item", item);
         return "/item/detail";
     }
 
-    @GetMapping("/item/itemCart")
+    @GetMapping("/items/itemCarts")
     public String itemCart(HttpSession session, Model model){
         MemberVO user = (MemberVO)session.getAttribute("user");
         if(user != null){
