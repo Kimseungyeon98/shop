@@ -1,5 +1,6 @@
 package ksy.shop.member.vo;
 
+import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
