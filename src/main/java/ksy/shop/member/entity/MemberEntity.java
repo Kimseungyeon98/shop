@@ -1,9 +1,13 @@
 package ksy.shop.member.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="MEMBER")
+@Getter
+@NoArgsConstructor
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_gen")
@@ -15,4 +19,11 @@ public class MemberEntity {
     private String id;
     @Column(nullable = false)
     private String password;
+
+    public MemberEntity(Long num, String name, String id, String password) {
+        this.num = num;
+        this.name = name;
+        this.id = id;
+        this.password = password;
+    }
 }

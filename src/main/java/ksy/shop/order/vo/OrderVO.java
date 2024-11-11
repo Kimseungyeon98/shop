@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class OrderVO {
     /*
      * 주문 번호 Long
@@ -20,10 +21,18 @@ public class OrderVO {
     */
 
     private Long num;
-    private MemberVO member;
-    private List<ItemVO> item;
     private String reg_date;
     private String status;
     private Long total_price;
+    private MemberVO member;
+    private ItemVO item;
 
+    public OrderVO(Long num, String reg_date, String status, Long total_price, MemberVO member, ItemVO item) {
+        this.num = num;
+        this.reg_date = reg_date;
+        this.status = status;
+        this.total_price = total_price;
+        this.member = member;
+        this.item = item;
+    }
 }
