@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @SpringBootTest
 @Transactional
 class OrderServiceImplTest {
@@ -65,5 +67,28 @@ class OrderServiceImplTest {
         System.out.println("저장된 정보: " + findOrder.toString());
         System.out.println("-----------------------------------------");
         Assertions.assertThat(saveOrder.getTotal_price()).isEqualTo(findOrder.getTotal_price());
+    }
+
+    @Test
+    @DisplayName("findByMemNum 메서드 테스트")
+    void findByMemNum() {
+        //given
+        MemberDTO member = memberMapper.selectMember(1l);
+        ItemDTO item = itemMapper.selectItem(3l);
+        OrderDTO order = new OrderDTO(1000l,"2024-11-11","READY",item.getPrice()*item.getQuantity(),member,item);
+
+        //when
+        // 1. 3번 상품 주문 정보 저장
+        orderService.saveOrder(order);
+        // 2. 4번 상품 주문 정보 저장
+        item = itemMapper.selectItem(4l);
+        order.setItem(item);
+        orderService.saveOrder(order);
+
+        List<OrderDTO> orderList = orderService.findAllOrderByMember_Num(member.getNum());
+        //then
+        // 3. 회원 정보로 모든 주문 정보 조회
+        Assertions.assertThat(orderList.size()).isEqualTo(2);
+
     }
 }

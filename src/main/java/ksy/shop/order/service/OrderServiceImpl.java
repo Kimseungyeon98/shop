@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,12 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO findOrderByNum(Long num) {
         Optional<OrderEntity> op = orderRepository.findById(num);
         return op.map(OrderDTO::toDTO).orElse(null);
+    }
+
+    @Override
+    public List<OrderDTO> findAllOrderByMember_Num(Long mem_num) {
+        List<OrderEntity> entityList = orderRepository.findByMember_num(mem_num);
+        return entityList.stream().map(OrderDTO::toDTO).toList();
     }
 
     @Override

@@ -23,7 +23,7 @@
 
     <insert id="insertItem" parameterType="itemDTO">
         INSERT INTO item
-        VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{member.num}, #{quantity})
+        VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{quantity}, #{member.num})
     </insert>
 
     <select id="selectItemList" resultMap="item" parameterType="map">
