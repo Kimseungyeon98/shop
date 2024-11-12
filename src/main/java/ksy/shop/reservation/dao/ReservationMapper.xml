@@ -5,7 +5,7 @@
 
 <mapper namespace="ksy.shop.reservation.dao.ReservationMapper">
     <!--이중 객체 처리-->
-    <resultMap id="reservation" type="reservationVO">
+    <resultMap id="reservation" type="reservationDTO">
         <id property="num" column="num"/>
         <result property="name" column="name"/>
         <result property="content" column="content"/>
@@ -13,7 +13,7 @@
         <result property="end_date" column="end_date"/>
         <result property="price" column="price"/>
 
-        <association property="member" javaType="memberVO">
+        <association property="member" javaType="memberDTO">
             <id property="num" column="mem_num"/>
             <result property="id" column="mem_id"/>
             <result property="name" column="mem_name"/>
@@ -40,13 +40,13 @@
     </select>
 
     <!--insert-->
-    <insert id="insertReservation" parameterType="reservationVO">
+    <insert id="insertReservation" parameterType="reservationDTO">
         INSERT INTO RESERVATION
         VALUES (RESERVATION_SEQ.NEXTVAL, #{name}, #{content}, SYSDATE, #{end_date}, #{price}, #{mem_num})
     </insert>
 
     <!--update-->
-    <update id="updateReservation" parameterType="reservationVO">
+    <update id="updateReservation" parameterType="reservationDTO">
         UPDATE RESERVATION
         SET NAME=#{name},
             CONTENT=#{content},

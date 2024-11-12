@@ -1,10 +1,16 @@
-package ksy.shop.board.entity;
+package ksy.shop.board.domain;
 
 import jakarta.persistence.*;
-import ksy.shop.member.entity.MemberEntity;
+import ksy.shop.member.domain.MemberEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="BOARD")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq_gen")

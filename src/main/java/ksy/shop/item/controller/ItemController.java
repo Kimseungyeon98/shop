@@ -2,9 +2,9 @@ package ksy.shop.item.controller;
 
 import jakarta.servlet.http.HttpSession;
 import ksy.shop.item.service.ItemService;
-import ksy.shop.item.vo.ItemVO;
-import ksy.shop.item.vo.Item_CartVO;
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.item.domain.ItemDTO;
+import ksy.shop.item.domain.Item_CartDTO;
+import ksy.shop.member.domain.MemberDTO;
 import ksy.shop.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ItemController {
     public String item(Model model, @RequestParam(defaultValue = "1") String currentPage, @RequestParam(defaultValue = "5") String itemNum){
         //페이징 처리
         Map<String,String> map = PagingUtil.paging(currentPage,itemNum);
-        List<ItemVO> itemList = itemService.getItemList(map);
+        List<ItemDTO> itemList = itemService.getItemList(map);
         int totalCount = itemService.getItemCount();
 
         model.addAttribute("totalCount", totalCount);
@@ -44,15 +44,15 @@ public class ItemController {
 
     @GetMapping("/items/new")
     public String register(HttpSession session){
-        MemberVO user = (MemberVO)session.getAttribute("user");
+        MemberDTO user = (MemberDTO)session.getAttribute("user");
         if(user==null){
             return "/member/login";
         }
         return "/item/register";
     }
     @PostMapping("/items/new")
-    public String register(HttpSession session, ItemVO item, @RequestParam MultipartFile file) throws IOException {
-        MemberVO user = (MemberVO)session.getAttribute("user");
+    public String register(HttpSession session, ItemDTO item, @RequestParam MultipartFile file) throws IOException {
+        MemberDTO user = (MemberDTO)session.getAttribute("user");
         if(user==null){
             return "/member/login";
         } else {
@@ -92,16 +92,16 @@ public class ItemController {
 
     @GetMapping("/items/{itemNum}")
     public String detail(@PathVariable("itemNum") Long itemNum, Model model){
-        ItemVO item = itemService.getItem(itemNum);
+        ItemDTO item = itemService.getItem(itemNum);
         model.addAttribute("item", item);
         return "/item/detail";
     }
 
     @GetMapping("/items/itemCarts")
     public String itemCart(HttpSession session, Model model){
-        MemberVO user = (MemberVO)session.getAttribute("user");
+        MemberDTO user = (MemberDTO)session.getAttribute("user");
         if(user != null){
-            List<Item_CartVO> item_cartVOList = itemService.getItem_CartList(user.getNum());
+            List<Item_CartDTO> item_cartVOList = itemService.getItem_CartList(user.getNum());
             model.addAttribute("item_CartList", item_cartVOList);
         }
 

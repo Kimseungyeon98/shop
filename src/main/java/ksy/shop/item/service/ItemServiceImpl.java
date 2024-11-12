@@ -1,13 +1,12 @@
 package ksy.shop.item.service;
 
 import ksy.shop.item.dao.ItemMapper;
-import ksy.shop.item.vo.ItemVO;
-import ksy.shop.item.vo.Item_CartVO;
+import ksy.shop.item.domain.ItemDTO;
+import ksy.shop.item.domain.Item_CartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +18,12 @@ public class ItemServiceImpl implements ItemService{
     private ItemMapper itemMapper;
 
     @Override
-    public void registerItem(ItemVO item) {
+    public void registerItem(ItemDTO item) {
         itemMapper.insertItem(item);
     }
 
     @Override
-    public List<ItemVO> getItemList(Map<String, String> map) {
+    public List<ItemDTO> getItemList(Map<String, String> map) {
         return itemMapper.selectItemList(map);
     }
 
@@ -34,7 +33,7 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public ItemVO getItem(Long num) {
+    public ItemDTO getItem(Long num) {
         return itemMapper.selectItem(num);
     }
 
@@ -42,17 +41,17 @@ public class ItemServiceImpl implements ItemService{
 
 
     @Override
-    public void registerItem_cart(Item_CartVO item_cartVO){
+    public void registerItem_cart(Item_CartDTO item_cartVO){
         itemMapper.insertItem_Cart(item_cartVO);
     }
 
     @Override
-    public Item_CartVO getItem_Cart(Map<String, Long> map) {
+    public Item_CartDTO getItem_Cart(Map<String, Long> map) {
         return itemMapper.selectItem_Cart(map);
     }
 
     @Override
-    public List<Item_CartVO> getItem_CartList(Long mem_num) {
+    public List<Item_CartDTO> getItem_CartList(Long mem_num) {
         return itemMapper.selectItem_CartList(mem_num);
     }
 

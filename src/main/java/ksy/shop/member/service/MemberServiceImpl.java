@@ -1,7 +1,7 @@
 package ksy.shop.member.service;
 
 import ksy.shop.member.dao.MemberMapper;
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.member.domain.MemberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,22 +15,22 @@ public class MemberServiceImpl implements MemberService{
     private MemberMapper memberMapper;
 
     @Override
-    public void registerMember(MemberVO member) {
+    public void registerMember(MemberDTO member) {
         memberMapper.insertMember(member);
     }
 
     @Override
-    public MemberVO getMemberById(String id) {
+    public MemberDTO getMemberById(String id) {
         return memberMapper.selectMemberById(id);
     }
 
     @Override
-    public MemberVO getMember(Long num){
+    public MemberDTO getMember(Long num){
         return memberMapper.selectMember(num);
     }
 
     @Override
-    public List<MemberVO> getMemberList() {
+    public List<MemberDTO> getMemberList() {
         return memberMapper.selectMemberList();
     }
 }

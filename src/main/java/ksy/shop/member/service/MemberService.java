@@ -1,12 +1,12 @@
 package ksy.shop.member.service;
 
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.member.domain.MemberDTO;
 
 import java.util.List;
 
 public interface MemberService {
-    public void registerMember(MemberVO member);
-    public MemberVO getMemberById(String id);
-    public MemberVO getMember(Long num);
-    public List<MemberVO> getMemberList();
+    public void registerMember(MemberDTO member);
+    public MemberDTO getMemberById(String id);
+    public MemberDTO getMember(Long num);
+    public List<MemberDTO> getMemberList();
 }

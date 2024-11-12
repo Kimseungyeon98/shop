@@ -1,20 +1,20 @@
 package ksy.shop.reservation.service;
 
-import ksy.shop.reservation.vo.ReservationVO;
+import ksy.shop.reservation.domain.ReservationDTO;
 
 import java.util.List;
 
 public interface ReservationService {
     // select(find)
-    ReservationVO findReservationByNum(Long num);
-    ReservationVO findReservationByMemNum(Long mem_num);
-    List<ReservationVO> findReservationList();
+    ReservationDTO findReservationByNum(Long num);
+    ReservationDTO findReservationByMemNum(Long mem_num);
+    List<ReservationDTO> findReservationList();
 
     // insert(save)
-    void saveReservation(ReservationVO reservation);
+    void saveReservation(ReservationDTO reservation);
 
     // update(update)
-    void updateReservation(ReservationVO reservation);
+    void updateReservation(ReservationDTO reservation);
 
     // delete(delete)
     void deleteReservationByNum(Long num);

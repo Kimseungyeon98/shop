@@ -1,59 +1,69 @@
 package ksy.shop.order.service;
 
+import jakarta.persistence.EntityManager;
 import ksy.shop.item.dao.ItemMapper;
-import ksy.shop.item.entity.ItemEntity;
-import ksy.shop.item.vo.ItemVO;
+import ksy.shop.item.domain.ItemEntity;
+import ksy.shop.item.domain.ItemDTO;
 import ksy.shop.member.dao.MemberMapper;
-import ksy.shop.member.entity.MemberEntity;
-import ksy.shop.member.vo.MemberVO;
-import ksy.shop.order.entity.OrderEntity;
-import ksy.shop.order.repository.OrderRepository;
-import ksy.shop.order.vo.OrderVO;
+import ksy.shop.member.domain.MemberEntity;
+import ksy.shop.member.domain.MemberDTO;
+import ksy.shop.order.domain.OrderDTO;
+import ksy.shop.order.domain.OrderEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional
 class OrderServiceImplTest {
 
     @Autowired
-    OrderRepository orderRepository;
+    OrderService orderService;
     @Autowired
     MemberMapper memberMapper;
     @Autowired
     ItemMapper itemMapper;
+    @Autowired
+    EntityManager em;
+
 
     @Test
     @DisplayName("주문 로직 테스트")
     void saveOrder() {
-        MemberVO member = memberMapper.selectMember(21l);
-        ItemVO item = itemMapper.selectItem(1l);
+        //given&when : 21번 회원이 1번 아이템을 주문했다.
+        MemberDTO member = memberMapper.selectMember(21l);
+        ItemDTO item = itemMapper.selectItem(1l);
 
+        System.out.println("-----------------------------------------");
         System.out.println("member: " + member.toString());
         System.out.println("item: " + item.toString());
+        System.out.println("-----------------------------------------");
 
         // 1. itemVO를 itemEntity로
-        MemberVO register = item.getMember();
-        MemberEntity registerEntity = new MemberEntity(register.getNum(),register.getName(),register.getId(),register.getPassword());
-        ItemEntity itemEntity = new ItemEntity(item.getNum(),item.getName(),item.getType(),item.getContent(),item.getPrice(),item.getImage(),item.getReg_date(),item.getQuantity(), registerEntity);
+        ItemEntity itemEntity = ItemDTO.toEntity(item);
 
         // 2. memberVO를 memberEntity로
-        MemberEntity memberEntity = new MemberEntity(member.getNum(),member.getName(),member.getId(),member.getPassword());
+        MemberEntity memberEntity = MemberDTO.toEntity(member);
 
         // 3. orderEntity 생성
         OrderEntity orderEntity = new OrderEntity(1000l,"2024-11-11","READY",item.getPrice()*item.getQuantity(),memberEntity,itemEntity);
 
         // 4. save하기
-        OrderEntity orderEntity1 = orderRepository.save(orderEntity);
+        OrderDTO saveOrder = orderService.saveOrder(OrderDTO.toDTO(orderEntity));
 
-        Assertions.assertThat(orderEntity1.getClass()).isEqualTo(orderEntity.getClass());
+        // 5. find하기
+        System.out.println("우리가 찾을 주문의 num: " + saveOrder.getNum());
+        OrderDTO findOrder = orderService.findOrderByNum(saveOrder.getNum());
+
+        //that : 주문한 정보와 주문 저장 정보가 같나?
+        System.out.println("-----------------------------------------");
+        System.out.println("주문한 정보: " + saveOrder.toString());
+        System.out.println("저장된 정보: " + findOrder.toString());
+        System.out.println("-----------------------------------------");
+        Assertions.assertThat(saveOrder.getTotal_price()).isEqualTo(findOrder.getTotal_price());
     }
 }

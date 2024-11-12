@@ -1,15 +1,11 @@
-package ksy.shop.order.entity;
+package ksy.shop.order.domain;
 
 import jakarta.persistence.*;
-import ksy.shop.item.entity.ItemEntity;
-import ksy.shop.item.vo.ItemVO;
-import ksy.shop.member.entity.MemberEntity;
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.item.domain.ItemEntity;
+import ksy.shop.member.domain.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name="ORDERS")
@@ -29,10 +25,10 @@ public class OrderEntity {
     @Column(nullable = false)
     private Long total_price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="mem_num",referencedColumnName = "num",nullable = true)
     private MemberEntity member;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="item_num",referencedColumnName = "num",nullable = true)
     private ItemEntity item;
 }

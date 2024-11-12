@@ -1,6 +1,6 @@
 package ksy.shop.order.repository;
 
-import ksy.shop.order.entity.OrderEntity;
+import ksy.shop.order.domain.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

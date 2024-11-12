@@ -2,10 +2,10 @@ package ksy.shop.item.controller;
 
 import jakarta.servlet.http.HttpSession;
 import ksy.shop.item.service.ItemService;
-import ksy.shop.item.vo.ItemVO;
-import ksy.shop.item.vo.Item_CartVO;
+import ksy.shop.item.domain.ItemDTO;
+import ksy.shop.item.domain.Item_CartDTO;
 import ksy.shop.member.service.MemberService;
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.member.domain.MemberDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,14 +32,14 @@ public class ItemRestController {
         Map<String,Long> vmap = new HashMap<>();
         vmap.put("mem_num",mem_num);
         vmap.put("item_num",item_num);
-        Item_CartVO validation = itemService.getItem_Cart(vmap);
+        Item_CartDTO validation = itemService.getItem_Cart(vmap);
         if(validation==null){
-            Item_CartVO item_cartVO = new Item_CartVO();
+            Item_CartDTO item_cartVO = new Item_CartDTO();
 
-            ItemVO itemVO = itemService.getItem(item_num);
+            ItemDTO itemVO = itemService.getItem(item_num);
             item_cartVO.setItem(itemVO);
 
-            MemberVO memberVO = memberService.getMember(mem_num);
+            MemberDTO memberVO = memberService.getMember(mem_num);
             item_cartVO.setMember(memberVO);
 
             itemService.registerItem_cart(item_cartVO);
@@ -56,7 +56,7 @@ public class ItemRestController {
     public Map<String,String> cancleItemCart(HttpSession session, @RequestParam Long itemNum) {
         Map<String,String> map = new HashMap<>();
 
-        MemberVO user = (MemberVO) session.getAttribute("user");
+        MemberDTO user = (MemberDTO) session.getAttribute("user");
         Long mem_num = user.getNum();
         try{
             itemService.cancleItem_Cart(mem_num,itemNum);

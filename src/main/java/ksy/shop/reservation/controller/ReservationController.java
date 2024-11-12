@@ -2,16 +2,15 @@ package ksy.shop.reservation.controller;
 
 import jakarta.servlet.http.HttpSession;
 import ksy.shop.member.service.MemberService;
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.member.domain.MemberDTO;
 import ksy.shop.reservation.service.ReservationService;
-import ksy.shop.reservation.vo.ReservationVO;
+import ksy.shop.reservation.domain.ReservationDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +34,7 @@ public class ReservationController {
 
         /* 로그인 처리 끝 */
 
-        List<ReservationVO> reservationList = reservationService.findReservationList();
+        List<ReservationDTO> reservationList = reservationService.findReservationList();
 
         model.addAttribute("reservationList", reservationList);
         return "reservation/main";
@@ -46,12 +45,12 @@ public class ReservationController {
     @ResponseBody
     public HashMap<String,String> createReservation(HttpSession session){
         HashMap<String,String> map = new HashMap<>();
-        MemberVO user = (MemberVO)session.getAttribute("user");
+        MemberDTO user = (MemberDTO)session.getAttribute("user");
 
         //로그인 확인
         if(user!=null){
             /* 예약 로직 시작 */
-            ReservationVO reservation = new ReservationVO();
+            ReservationDTO reservation = new ReservationDTO();
 
 
             Date date = new Date();
@@ -72,7 +71,7 @@ public class ReservationController {
     // 예약 조회 페이지(예약번호)
     @GetMapping("/reservations/{num}")
     public String viewReservation(@PathVariable("num") Long num, Model model){
-        ReservationVO reservation = reservationService.findReservationByNum(num);
+        ReservationDTO reservation = reservationService.findReservationByNum(num);
 
         model.addAttribute("reservation", reservation);
 

@@ -1,11 +1,11 @@
 package ksy.shop.board.service;
 
-import ksy.shop.board.vo.BoardVO;
+import ksy.shop.board.domain.BoardDTO;
 
 import java.util.List;
 
 public interface BoardService {
-    public void registerBoard(BoardVO board);
-    public List<BoardVO> selectBoardList(String keyword);
-    public BoardVO getBoard(Long num);
+    public void registerBoard(BoardDTO board);
+    public List<BoardDTO> selectBoardList(String keyword);
+    public BoardDTO getBoard(Long num);
 }

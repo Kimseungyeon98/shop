@@ -1,7 +1,7 @@
 package ksy.shop.reservation.service;
 
 import ksy.shop.reservation.dao.ReservationMapper;
-import ksy.shop.reservation.vo.ReservationVO;
+import ksy.shop.reservation.domain.ReservationDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +16,27 @@ public class ResrvationServiceImpl implements ReservationService{
     private ReservationMapper reservationMapper;
 
     @Override
-    public ReservationVO findReservationByNum(Long num) {
+    public ReservationDTO findReservationByNum(Long num) {
         return reservationMapper.selectReservationByNum(num);
     }
 
     @Override
-    public ReservationVO findReservationByMemNum(Long mem_num) {
+    public ReservationDTO findReservationByMemNum(Long mem_num) {
         return reservationMapper.selectReservationByMemNum(mem_num);
     }
 
     @Override
-    public List<ReservationVO> findReservationList() {
+    public List<ReservationDTO> findReservationList() {
         return reservationMapper.selectReservationList();
     }
 
     @Override
-    public void saveReservation(ReservationVO reservation) {
+    public void saveReservation(ReservationDTO reservation) {
         reservationMapper.insertReservation(reservation);
     }
 
     @Override
-    public void updateReservation(ReservationVO reservation) {
+    public void updateReservation(ReservationDTO reservation) {
         reservationMapper.updateReservation(reservation);
     }
 

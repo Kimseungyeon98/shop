@@ -4,21 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksy.shop.member.dao.MemberMapper">
-    <insert id="insertMember" parameterType="memberVO">
+    <insert id="insertMember" parameterType="memberDTO">
         INSERT INTO member (num,name,id,password)
         VALUES(member_seq.nextval, #{name}, #{id}, #{password})
     </insert>
-    <select id="selectMemberById" parameterType="string" resultType="memberVO">
+    <select id="selectMemberById" parameterType="string" resultType="memberDTO">
         SELECT *
         FROM member
         WHERE id = #{id}
     </select>
-    <select id="selectMember" parameterType="long" resultType="memberVO">
+    <select id="selectMember" parameterType="long" resultType="memberDTO">
         SELECT *
         FROM member
         WHERE num = #{num}
     </select>
-    <select id="selectMemberList" resultType="memberVO">
+    <select id="selectMemberList" resultType="memberDTO">
         SELECT *
         FROM member
     </select>

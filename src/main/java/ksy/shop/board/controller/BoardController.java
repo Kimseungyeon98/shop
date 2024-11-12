@@ -2,8 +2,8 @@ package ksy.shop.board.controller;
 
 import jakarta.servlet.http.HttpSession;
 import ksy.shop.board.service.BoardService;
-import ksy.shop.board.vo.BoardVO;
-import ksy.shop.member.vo.MemberVO;
+import ksy.shop.board.domain.BoardDTO;
+import ksy.shop.member.domain.MemberDTO;
 import ksy.shop.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +21,22 @@ public class BoardController {
 
     @GetMapping("/boards")
     public String board(Model model){
-        List<BoardVO> boardList = boardService.selectBoardList(null);
+        List<BoardDTO> boardList = boardService.selectBoardList(null);
         model.addAttribute("boardList", boardList);
         return "/board/list";
     }
 
     @GetMapping("/boards-ajax")
     @ResponseBody
-    public List<BoardVO> searchAjax(@RequestParam String keyword){
-        List<BoardVO> boardList = boardService.selectBoardList(keyword);
+    public List<BoardDTO> searchAjax(@RequestParam String keyword){
+        List<BoardDTO> boardList = boardService.selectBoardList(keyword);
         System.out.println(boardList);
         return boardList;
     }
 
     @GetMapping("/boards/new")
     public String register(HttpSession session){
-        MemberVO user = (MemberVO)session.getAttribute("user");
+        MemberDTO user = (MemberDTO)session.getAttribute("user");
         if(user != null){
             return "/board/register";
         } else {
@@ -44,8 +44,8 @@ public class BoardController {
         }
     }
     @PostMapping("/boards")
-    public String register(BoardVO board, HttpSession session){
-        MemberVO user = (MemberVO)session.getAttribute("user");
+    public String register(BoardDTO board, HttpSession session){
+        MemberDTO user = (MemberDTO)session.getAttribute("user");
         board.setMember(user);
 
         boardService.registerBoard(board);
@@ -54,7 +54,7 @@ public class BoardController {
 
     @GetMapping("/boards/{num}")
     public String detail(@PathVariable("num") Long num, Model model){
-        BoardVO board = boardService.getBoard(num);
+        BoardDTO board = boardService.getBoard(num);
 
         board.setReg_date(DateUtil.formattingDate(board.getReg_date()));
         model.addAttribute("board", board);

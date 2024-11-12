@@ -1,7 +1,8 @@
-package ksy.shop.item.entity;
+package ksy.shop.item.domain;
 
 import jakarta.persistence.*;
-import ksy.shop.member.entity.MemberEntity;
+import ksy.shop.member.domain.MemberEntity;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Table(name="ITEM")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq_gen")
@@ -30,19 +32,7 @@ public class ItemEntity {
     @Column(nullable = false)
     private Long quantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="mem_num", referencedColumnName = "num", nullable = false)
     private MemberEntity member;
-
-    public ItemEntity(Long num, String name, String type, String content, Long price, String image, String reg_date, Long quantity, MemberEntity member) {
-        this.num = num;
-        this.name = name;
-        this.type = type;
-        this.content = content;
-        this.price = price;
-        this.image = image;
-        this.reg_date = reg_date;
-        this.quantity = quantity;
-        this.member = member;
-    }
 }

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ksy.shop.item.dao.ItemMapper">
-    <resultMap id="item" type="itemVO">
+    <resultMap id="item" type="itemDTO">
         <id property="num" column="num"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
@@ -14,14 +14,14 @@
         <result property="reg_date" column="reg_date"/>
         <result property="quantity" column="quantity"/>
 
-        <association property="member" javaType="memberVO">
+        <association property="member" javaType="memberDTO">
             <id property="num" column="mem_num"/>
             <result property="id" column="mem_id"/>
             <result property="name" column="mem_name"/>
         </association>
     </resultMap>
 
-    <insert id="insertItem" parameterType="itemVO">
+    <insert id="insertItem" parameterType="itemDTO">
         INSERT INTO item
         VALUES(item_seq.nextval, #{name}, #{type}, #{content}, #{price}, #{image}, sysdate, #{member.num}, #{quantity})
     </insert>
@@ -53,15 +53,15 @@
 
 
 
-    <resultMap id="item_cart" type="item_CartVO">
+    <resultMap id="item_cart" type="item_CartDTO">
         <id property="num" column="num"/>
         <result property="reg_date" column="reg_date"/>
-        <association property="member" javaType="memberVO">
+        <association property="member" javaType="memberDTO">
             <id property="num" column="mem_num"/>
             <result property="id" column="mem_id"/>
             <result property="name" column="mem_name"/>
         </association>
-        <association property="item" javaType="itemVO">
+        <association property="item" javaType="itemDTO">
             <id property="num" column="item_num"/>
             <result property="name" column="item_name"/>
             <result property="type" column="item_type"/>
@@ -73,7 +73,7 @@
         </association>
     </resultMap>
 
-    <insert id="insertItem_Cart" parameterType="item_CartVO">
+    <insert id="insertItem_Cart" parameterType="item_CartDTO">
         INSERT INTO ITEM_CART
         VALUES(item_cart_seq.nextval, #{member.num}, #{item.num}, SYSDATE)
     </insert>

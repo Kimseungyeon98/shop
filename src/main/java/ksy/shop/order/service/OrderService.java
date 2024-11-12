@@ -1,15 +1,13 @@
 package ksy.shop.order.service;
 
-import ksy.shop.order.entity.OrderEntity;
-import ksy.shop.order.vo.OrderVO;
+import ksy.shop.order.domain.OrderDTO;
 
 public interface OrderService {
     // select(find)
-    OrderVO findOrderByNum(Long num);
-    OrderVO findOrderByMemNum(Long mem_num);
+    OrderDTO findOrderByNum(Long num);
 
     // insert(save)
-    void saveOrder(OrderVO order);
+    OrderDTO saveOrder(OrderDTO order);
 
     // update(update)
 

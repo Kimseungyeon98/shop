@@ -20,7 +20,7 @@ spring:
         format_sql: true
     show-sql: true
 mybatis:
-  type-aliases-package: ksy.shop.**.vo
+  type-aliases-package: ksy.shop.**.domain
   mapper-locations: file:src/main/java/ksy/shop/**/dao/*.xml
 logging:
   level:
