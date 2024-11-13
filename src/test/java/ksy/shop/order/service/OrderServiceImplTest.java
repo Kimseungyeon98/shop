@@ -40,10 +40,11 @@ class OrderServiceImplTest {
         MemberDTO member = memberMapper.selectMember(21l);
         ItemDTO item = itemMapper.selectItem(1l);
 
-        System.out.println("-----------------------------------------");
+        System.out.println("--------------------------------------------------------");
+        System.out.println("----------------------- 주문 전 정보 -------------------------");
         System.out.println("member: " + member.toString());
         System.out.println("item: " + item.toString());
-        System.out.println("-----------------------------------------");
+        System.out.println("--------------------------------------------------------");
 
         // 1. itemVO를 itemEntity로
         ItemEntity itemEntity = ItemDTO.toEntity(item);
@@ -52,7 +53,7 @@ class OrderServiceImplTest {
         MemberEntity memberEntity = MemberDTO.toEntity(member);
 
         // 3. orderEntity 생성
-        OrderEntity orderEntity = new OrderEntity(1000l,"2024-11-11","READY",item.getPrice()*item.getQuantity(),memberEntity,itemEntity);
+        OrderEntity orderEntity = new OrderEntity(null,"2024-11-11","READY",item.getPrice()*item.getQuantity(),memberEntity,itemEntity);
 
         // 4. save하기
         OrderDTO saveOrder = orderService.saveOrder(OrderDTO.toDTO(orderEntity));

@@ -45,8 +45,10 @@ public class OrderServiceImpl implements OrderService {
 
             item.setQuantity(item.getQuantity() - 1);
             itemMapper.updateQuantityItem(item);
+            OrderDTO newOrder = OrderDTO.toDTO(orderEntity);
+            newOrder.setItem(item);
 
-            return OrderDTO.toDTO(orderEntity);
+            return newOrder;
         } else { //수량이 0 이하라면?
             // 사실 여기서 에러를 던지고 그걸 캐치해서 주문재고가 없다는걸 알아채야 한다.
             // 추후에 추가할 예정 일단 null이 반환되면 주문 에러로 가정하겠음.
