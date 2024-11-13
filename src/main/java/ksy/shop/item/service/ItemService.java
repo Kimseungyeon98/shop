@@ -11,6 +11,7 @@ public interface ItemService {
     public List<ItemDTO> getItemList(Map<String,String> map);
     public int getItemCount();
     public ItemDTO getItem(Long num);
+    public void updateQuantityItem(ItemDTO item);
 
     public void registerItem_cart(Item_CartDTO item_cartVO);
     public Item_CartDTO getItem_Cart(Map<String,Long> map);

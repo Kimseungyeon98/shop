@@ -13,6 +13,7 @@ public interface ItemMapper {
     public List<ItemDTO> selectItemList(Map<String,String> map);
     public int selectItemCount();
     public ItemDTO selectItem(Long num);
+    void updateQuantityItem(ItemDTO item);
 
 
 

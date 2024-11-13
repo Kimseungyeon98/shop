@@ -37,8 +37,10 @@ public class ItemServiceImpl implements ItemService{
         return itemMapper.selectItem(num);
     }
 
-
-
+    @Override
+    public void updateQuantityItem(ItemDTO item) {
+        itemMapper.updateQuantityItem(item);
+    }
 
     @Override
     public void registerItem_cart(Item_CartDTO item_cartVO){

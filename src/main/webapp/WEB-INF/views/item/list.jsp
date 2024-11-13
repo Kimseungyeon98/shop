@@ -32,6 +32,7 @@
                     <th>상품 가격</th>
                     <th>상품 등록일</th>
                     <th>상품 수량</th>
+                    <th>주문버튼</th>
                 </tr>
                 <c:forEach items="${itemList}" var="item">
                 <tr>
@@ -50,6 +51,7 @@
                     <td>${item.price}</td>
                     <td>${item.reg_date}</td>
                     <td>${item.quantity}</td>
+                    <td><button onclick="order('${item.num}')">주문하기</button></td>
                 </tr>
                 </c:forEach>
             </table>
@@ -64,4 +66,31 @@
         </div>
         <button onclick="location.href='/'">뒤로가기</button>
     </body>
+    <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+    <script>
+        function order(itemNum){
+            if(confirm('주문하시겠습니까?')){
+                $.ajax({
+                    url: '/orders/'+itemNum,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function(map){
+                        if(map.auth==='login'){
+                            if(map.status==='success'){
+                                alert('주문이 완료되었습니다.');
+                            } else if(map.status==='fail-1'){
+                                alert('주문 실패했습니다. 재고 확인 후 다시 주문해주세요.');
+                            } else if(map.status==='fail'){
+                                alert('주문 실패했습니다. 알 수 없는 에러입니다.');
+                            }
+                        }
+                        location.href = map.url;
+                    },
+                    error: function(){
+                        alert('서버 오류입니다. 다시 시도해주세요.')
+                    }
+                })
+            }
+        }
+    </script>
 </html>

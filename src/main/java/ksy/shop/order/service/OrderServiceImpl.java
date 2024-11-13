@@ -1,5 +1,8 @@
 package ksy.shop.order.service;
 
+import ksy.shop.item.dao.ItemMapper;
+import ksy.shop.item.domain.ItemDTO;
+import ksy.shop.item.service.ItemService;
 import ksy.shop.order.domain.OrderEntity;
 import ksy.shop.order.repository.OrderRepository;
 import ksy.shop.order.domain.OrderDTO;
@@ -16,6 +19,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    ItemMapper itemMapper;
 
     @Override
     public OrderDTO findOrderByNum(Long num) {
@@ -30,8 +35,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO saveOrder(OrderDTO order) {
-        return OrderDTO.toDTO(orderRepository.save(OrderDTO.toEntity(order)));
+    public OrderDTO saveOrder(OrderDTO order){
+        // 수량이 0보다 크다면? -> 주문 가능
+        if(order.getItem().getQuantity() > 0){
+            // 1. 주문을 한다.
+            OrderEntity orderEntity = orderRepository.save(OrderDTO.toEntity(order));
+            // 2. 주문 상품의 재고수량이 하나 줄어든다.
+            ItemDTO item = ItemDTO.toDTO(orderEntity.getItem());
+
+            item.setQuantity(item.getQuantity() - 1);
+            itemMapper.updateQuantityItem(item);
+
+            return OrderDTO.toDTO(orderEntity);
+        } else { //수량이 0 이하라면?
+            // 사실 여기서 에러를 던지고 그걸 캐치해서 주문재고가 없다는걸 알아채야 한다.
+            // 추후에 추가할 예정 일단 null이 반환되면 주문 에러로 가정하겠음.
+            return null;
+        }
     }
 
     @Override

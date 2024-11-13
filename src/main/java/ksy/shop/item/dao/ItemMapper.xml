@@ -49,6 +49,9 @@
         ON i.mem_num = m.num
         WHERE i.num=#{num}
     </select>
+    <update id="updateQuantityItem" parameterMap="item">
+        UPDATE item SET quantity = #{item.quantity} WHERE num = #{item.num}
+    </update>
 
 
 
