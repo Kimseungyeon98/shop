@@ -4,6 +4,8 @@ import ksy.shop.item.domain.ItemDTO;
 import ksy.shop.member.domain.MemberDTO;
 import lombok.*;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @ToString
@@ -20,7 +22,7 @@ public class OrderDTO {
     */
 
     private Long num;
-    private String reg_date;
+    private Date reg_date;
     private String status;
     private Long total_price;
     private MemberDTO member;

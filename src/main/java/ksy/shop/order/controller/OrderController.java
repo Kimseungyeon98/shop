@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,23 +65,23 @@ public class OrderController {
         //로그인 처리 되어 있을 때만 주문 등록 가능
         if(user == null) {
             map.put("auth", "logout");
-            map.put("url","redirect:/members/login");
+            map.put("url","members/logIn");
         } else {
             map.put("auth", "login");
             try{
                 ItemDTO item = itemService.getItem(item_num);
-                OrderDTO order = new OrderDTO(null,"sysdate","ready",item.getPrice()*item.getQuantity(),user,item);
+                OrderDTO order = new OrderDTO(null,new Date(),"ready",item.getPrice()*item.getQuantity(),user,item);
                 order = orderService.saveOrder(order);
                 if(order!=null){
-                    map.put("url","redirect:/orders/"+order.getNum());
+                    map.put("url","orders/"+order.getNum());
                     map.put("status", "success");
                 } else {
-                    map.put("url", "redirect:/orders");
+                    map.put("url", "orders");
                     map.put("status", "fail-1");
                 }
             } catch(Exception e){
                 //무슨 에러가 발생할까?
-                map.put("url","redirect:/orders");
+                map.put("url","orders");
                 map.put("status", "fail");
             }
         }

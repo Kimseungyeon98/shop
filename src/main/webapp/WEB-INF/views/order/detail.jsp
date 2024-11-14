@@ -9,7 +9,9 @@
     <div>
         <h2>주문 정보 상세 조회</h2>
     </div>
-
+    <div>
+        <button onclick="location.href='/'">메인으로 가기</button>
+    </div>
     <div>
         <ul>
             <li>주문 번호  : ${order.num}</li>

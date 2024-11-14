@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Entity
 @Table(name="ORDERS")
 @Getter
@@ -19,7 +21,7 @@ public class OrderEntity {
     private Long num;
 
     @Column(nullable = false)
-    private String reg_date;
+    private Date reg_date;
     @Column(nullable = false)
     private String status;
     @Column(nullable = false)

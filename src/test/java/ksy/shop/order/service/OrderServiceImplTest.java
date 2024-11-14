@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -53,7 +54,7 @@ class OrderServiceImplTest {
         MemberEntity memberEntity = MemberDTO.toEntity(member);
 
         // 3. orderEntity 생성
-        OrderEntity orderEntity = new OrderEntity(null,"2024-11-11","READY",item.getPrice()*item.getQuantity(),memberEntity,itemEntity);
+        OrderEntity orderEntity = new OrderEntity(null,new Date(),"READY",item.getPrice()*item.getQuantity(),memberEntity,itemEntity);
 
         // 4. save하기
         OrderDTO saveOrder = orderService.saveOrder(OrderDTO.toDTO(orderEntity));
@@ -76,7 +77,7 @@ class OrderServiceImplTest {
         //given
         MemberDTO member = memberMapper.selectMember(1l);
         ItemDTO item = itemMapper.selectItem(3l);
-        OrderDTO order = new OrderDTO(1000l,"2024-11-11","READY",item.getPrice()*item.getQuantity(),member,item);
+        OrderDTO order = new OrderDTO(1000l,new Date(),"READY",item.getPrice()*item.getQuantity(),member,item);
 
         //when
         // 1. 3번 상품 주문 정보 저장

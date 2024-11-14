@@ -75,6 +75,7 @@
                     type: 'POST',
                     dataType: 'JSON',
                     success: function(map){
+                        const url = map.url;
                         if(map.auth==='login'){
                             if(map.status==='success'){
                                 alert('주문이 완료되었습니다.');
@@ -83,8 +84,12 @@
                             } else if(map.status==='fail'){
                                 alert('주문 실패했습니다. 알 수 없는 에러입니다.');
                             }
+                        } else if(map.auth==='logout'){
+                            if(confirm('로그인 하시겠습니까?')){
+                                location.href=url;
+                            }
                         }
-                        location.href = map.url;
+                        location.href=url;
                     },
                     error: function(){
                         alert('서버 오류입니다. 다시 시도해주세요.')
