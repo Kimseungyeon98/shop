@@ -11,6 +11,7 @@
     </div>
     <div>
         <button onclick="location.href='/'">메인으로 가기</button>
+        <button onclick="location.href='/items'">상품보러 가기</button>
     </div>
     <div>
         <ul>
