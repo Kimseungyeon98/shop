@@ -28,9 +28,9 @@ public class OrderEntity {
     private Long total_price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="mem_num",referencedColumnName = "num",nullable = true)
+    @JoinColumn(name="mem_num",referencedColumnName = "num")
     private MemberEntity member;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="item_num",referencedColumnName = "num",nullable = true)
+    @JoinColumn(name="item_num",referencedColumnName = "num")
     private ItemEntity item;
 }

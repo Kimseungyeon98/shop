@@ -25,7 +25,7 @@ public class ItemEntity {
     private String content;
     @Column(nullable = false)
     private Long price;
-    @Column(nullable = true)
+    @Column
     private String image;
     @Column(nullable = false)
     private String reg_date;
