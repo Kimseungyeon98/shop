@@ -7,6 +7,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script type="text/javascript" src='/js/button.js'></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<button onclick="ksyClick()">sd</button>
 <div class="container mt-5">
     <!-- Search Form -->
     <form class="row g-2 mb-4 pb-4 d-flex justify-content-center form-control">
